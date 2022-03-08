@@ -73,22 +73,25 @@ class DetalhesScrenn: UIView {
         return image
     }()
     
+    override init(frame:CGRect) {
+        super.init(frame: frame)
+        configSuperView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func configSuperView(){
         self.addSubview(self.estrelaImage)
         self.addSubview(self.backButton)
         self.addSubview(self.moedaImage)
         self.addSubview(self.adicionarButton)
         self.addSubview(self.nomeLabel)
-        self.addSubview(self.valorLabel)
-        
+        self.addSubview(self.valorLabel)   
     }
+
     
-    override init(frame:CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+   
     
 }
