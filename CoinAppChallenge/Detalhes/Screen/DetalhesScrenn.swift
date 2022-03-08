@@ -75,7 +75,8 @@ class DetalhesScrenn: UIView {
     
     override init(frame:CGRect) {
         super.init(frame: frame)
-        configSuperView()
+        self.configBackGround()
+        self.configSuperView()
     }
     
     required init?(coder: NSCoder) {
@@ -88,10 +89,12 @@ class DetalhesScrenn: UIView {
         self.addSubview(self.moedaImage)
         self.addSubview(self.adicionarButton)
         self.addSubview(self.nomeLabel)
-        self.addSubview(self.valorLabel)   
+        self.addSubview(self.valorLabel)
     }
 
-    
+    private func configBackGround(){
+        self.backgroundColor = UIColor(red: 141/255, green: 149/255, blue: 98/255, alpha: 1.0)
+    }
    
     
 }
