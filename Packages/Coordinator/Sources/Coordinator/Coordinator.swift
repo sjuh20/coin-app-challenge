@@ -1,6 +1,5 @@
-public struct Coordinator {
-    public private(set) var text = "Hello, World!"
-
-    public init() {
-    }
+import SwiftUI
+  public protocol Coordinator: AnyObject {
+  var navigationController: UINavigationController? {get set}
+  init(navigationController: UINavigationController?)
 }
