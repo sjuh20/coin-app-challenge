@@ -97,4 +97,41 @@ class DetalhesScrenn: UIView {
     }
    
     
+    // MARK: - Define as constraints
+    
+    private func setUpConstraints(){
+        NSLayoutConstraint.activate([
+        
+            self.nomeLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            self.nomeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        
+            self.backButton.topAnchor.constraint(equalTo: self.nomeLabel.topAnchor),
+            self.backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            
+            self.moedaImage.topAnchor.constraint(equalTo: self.nomeLabel.bottomAnchor, constant: 35),
+            self.moedaImage.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 40),
+            self.moedaImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            self.moedaImage.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.valorLabel.topAnchor.constraint(equalTo: self.moedaImage.bottomAnchor, constant: 10),
+            self.valorLabel.centerXAnchor.constraint(equalTo: self.nomeLabel.centerXAnchor),
+            self.valorLabel.heightAnchor.constraint(equalToConstant: 70),
+    
+            self.adicionarButton.topAnchor.constraint(equalTo: self.valorLabel.bottomAnchor, constant: 20),
+            self.adicionarButton.leadingAnchor.constraint(equalTo: self.leadingAnchor , constant: 30),
+            self.adicionarButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -30),
+            self.adicionarButton.heightAnchor.constraint(equalToConstant: 50),
+
+//            self.viewPreta.topAnchor.constraint(equalTo: self.adicionarButton.bottomAnchor, constant: 40),
+//            self.viewPreta.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+//            self.viewPreta.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+//            self.viewPreta.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            self.estrelaImage.bottomAnchor.constraint(equalTo: self.moedaImage.topAnchor, constant: 5),
+            self.estrelaImage.trailingAnchor.constraint(equalTo: self.adicionarButton.trailingAnchor),
+            self.estrelaImage.widthAnchor.constraint(equalToConstant: 20),
+            self.estrelaImage.heightAnchor.constraint(equalToConstant: 20),
+        ])
+    }
+
 }
