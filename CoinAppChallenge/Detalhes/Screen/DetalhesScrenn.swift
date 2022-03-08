@@ -7,8 +7,25 @@
 
 import UIKit
 
+protocol DetalhesScreenProtocol: AnyObject{
+    
+}
+
 class DetalhesScrenn: UIView {
 
+    weak var delegate:DetalhesScreenProtocol?
+    
+    func delegate(delegate:DetalhesScreenProtocol?){
+        self.delegate = delegate
+    }
+    
+    public var viewPreta: DetalhesViewBlack = {
+        let view = DetalhesViewBlack()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     lazy var backButton:UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +34,7 @@ class DetalhesScrenn: UIView {
         let imageBack = UIImage(named: "back")
         imageBack?.withTintColor(UIColor.white)
         button.setImage(imageBack, for: .normal)
-//        button.addTarget(self, action: #selector(self.tappedBackButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.tappedBackButton), for: .touchUpInside)
         return button
     }()
     
@@ -59,7 +76,7 @@ class DetalhesScrenn: UIView {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
         button.backgroundColor = UIColor(red: 141/255, green: 149/255, blue: 98/255, alpha: 1.0)
-//        button.addTarget(self, action: #selector(self.tappedregisterButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.tappedregisterButton), for: .touchUpInside)
         return button
     }()
     
@@ -96,6 +113,21 @@ class DetalhesScrenn: UIView {
         self.backgroundColor = UIColor(red: 141/255, green: 149/255, blue: 98/255, alpha: 1.0)
     }
    
+    @objc private func tappedBackButton(){
+
+    }
+    
+    @objc private func tappedregisterButton(sender: UIButton!){
+        
+        if !estrelaImage.isHidden{
+            adicionarButton.setTitle("Adicionar", for: .normal)
+            estrelaImage.isHidden = true
+            
+        }else{
+        adicionarButton.setTitle("Remover", for: .normal)
+        estrelaImage.isHidden = false
+        }
+    }
     
     // MARK: - Define as constraints
     
@@ -122,10 +154,10 @@ class DetalhesScrenn: UIView {
             self.adicionarButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -30),
             self.adicionarButton.heightAnchor.constraint(equalToConstant: 50),
 
-//            self.viewPreta.topAnchor.constraint(equalTo: self.adicionarButton.bottomAnchor, constant: 40),
-//            self.viewPreta.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            self.viewPreta.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-//            self.viewPreta.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.viewPreta.topAnchor.constraint(equalTo: self.adicionarButton.bottomAnchor, constant: 40),
+            self.viewPreta.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.viewPreta.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.viewPreta.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             self.estrelaImage.bottomAnchor.constraint(equalTo: self.moedaImage.topAnchor, constant: 5),
             self.estrelaImage.trailingAnchor.constraint(equalTo: self.adicionarButton.trailingAnchor),
