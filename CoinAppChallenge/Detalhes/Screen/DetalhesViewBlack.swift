@@ -90,11 +90,37 @@ class DetalhesViewBlack: UIView {
         
     }
     
+    private func setUpConstraintsView(){
+        NSLayoutConstraint.activate([
+        
+        self.volumeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        self.volumeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+      
+        self.ultimaHrLabel.topAnchor.constraint(equalTo: self.volumeLabel.bottomAnchor, constant: 30),
+        self.ultimaHrLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+        
+        self.ultimoMesLabel.topAnchor.constraint(equalTo: self.ultimaHrLabel.bottomAnchor, constant: 30),
+        self.ultimoMesLabel.leadingAnchor.constraint(equalTo: self.ultimaHrLabel.leadingAnchor),
+        
+        self.ultimoAnoLabel.topAnchor.constraint(equalTo: self.ultimoMesLabel.bottomAnchor, constant: 30),
+        self.ultimoAnoLabel.leadingAnchor.constraint(equalTo: self.ultimaHrLabel.leadingAnchor),
+        
+        self.valorHr.topAnchor.constraint(equalTo: self.ultimaHrLabel.topAnchor),
+        self.valorHr.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+        
+        self.valorMes.topAnchor.constraint(equalTo: self.valorHr.bottomAnchor, constant: 30),
+        self.valorMes.trailingAnchor.constraint(equalTo: self.valorHr.trailingAnchor),
+        
+        self.valorAno.topAnchor.constraint(equalTo: self.valorMes.bottomAnchor, constant: 30),
+        self.valorAno.trailingAnchor.constraint(equalTo: self.valorMes.trailingAnchor),
+        
+        ])}
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .black
         self.configSuperViewPreta()
-        
+        self.setUpConstraintsView()
     }
     
     required init?(coder: NSCoder) {
