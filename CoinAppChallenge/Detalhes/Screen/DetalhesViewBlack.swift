@@ -79,4 +79,27 @@ class DetalhesViewBlack: UIView {
         return valor
     }()
 
+    private func configSuperViewPreta(){
+        self.addSubview(self.volumeLabel)
+        self.addSubview(self.ultimaHrLabel)
+        self.addSubview(self.ultimoMesLabel)
+        self.addSubview(self.ultimoAnoLabel)
+        self.addSubview(self.valorHr)
+        self.addSubview(self.valorMes)
+        self.addSubview(self.valorAno)
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .black
+        self.configSuperViewPreta()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
+
+
