@@ -8,7 +8,8 @@
 import UIKit
 
 protocol DetalhesScreenProtocol: AnyObject{
-    
+    func actionBackButton()
+    func actionRegisterButton()
 }
 
 class DetalhesScrenn: UIView {
@@ -114,11 +115,11 @@ class DetalhesScrenn: UIView {
     }
    
     @objc private func tappedBackButton(){
-
+        self.delegate?.actionBackButton()
     }
     
     @objc private func tappedregisterButton(sender: UIButton!){
-        
+        self.delegate?.actionRegisterButton()
         if !estrelaImage.isHidden{
             adicionarButton.setTitle("Adicionar", for: .normal)
             estrelaImage.isHidden = true
