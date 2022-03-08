@@ -21,7 +21,14 @@ class DetalhesScrenn: UIView {
         return button
     }()
     
-    
+    lazy var nomeLabel:UILabel = {
+        let nome = UILabel()
+        nome.translatesAutoresizingMaskIntoConstraints = false
+        nome.textColor = .white
+        nome.font = UIFont.boldSystemFont(ofSize: 14)
+        nome.text = "BTC"
+        return nome
+    }()
     
     
     override init(frame:CGRect) {
