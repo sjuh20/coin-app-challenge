@@ -1,14 +1,18 @@
 //
 //  ViewController.swift
-//  CoinAppChallenge
+//  CryptoTrack
 //
-//  Created by Ana Brito Souza on 07/03/22.
+//  Created by Jonathan Pereira Almeida on 08/03/22.
 //
 
 import UIKit
 
 class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
 
+    
+    
+    
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
@@ -27,6 +31,14 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         return formatter
     }()
     
+    //MARK: -  search
+
+    
+    
+    
+    
+    
+    //MARK: - finish search
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,10 +80,17 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         
     }
     
+   
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+
+        }
 
     // TableView
     
@@ -95,3 +114,5 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     }
     
 }
+
+
