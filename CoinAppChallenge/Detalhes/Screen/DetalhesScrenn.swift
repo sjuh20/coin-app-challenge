@@ -9,7 +9,7 @@ import UIKit
 
 protocol DetalhesScreenProtocol: AnyObject{
     func actionBackButton()
-    func actionRegisterButton()
+    func actionAdicionarButton()
 }
 
 class DetalhesScrenn: UIView {
@@ -77,7 +77,7 @@ class DetalhesScrenn: UIView {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
         button.backgroundColor = UIColor(red: 141/255, green: 149/255, blue: 98/255, alpha: 1.0)
-        button.addTarget(self, action: #selector(self.tappedregisterButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.tappedAdicionarButton), for: .touchUpInside)
         return button
     }()
     
@@ -118,8 +118,8 @@ class DetalhesScrenn: UIView {
         self.delegate?.actionBackButton()
     }
     
-    @objc private func tappedregisterButton(sender: UIButton!){
-        self.delegate?.actionRegisterButton()
+    @objc private func tappedAdicionarButton(sender: UIButton!){
+        self.delegate?.actionAdicionarButton()
         if !estrelaImage.isHidden{
             adicionarButton.setTitle("Adicionar", for: .normal)
             estrelaImage.isHidden = true

@@ -22,18 +22,6 @@ class DetalhesVc: UIViewController {
 
 }
 
-extension DetalhesVc: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-    }
-    // Baixar o teclado
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        return true
-    }
-}
-
 
 extension DetalhesVc: DetalhesScreenProtocol{
     func actionBackButton() {
@@ -41,9 +29,8 @@ extension DetalhesVc: DetalhesScreenProtocol{
         self.navigationController?.popViewController(animated: true)
     }
     
-    func actionRegisterButton() {
+    func actionAdicionarButton() {
         
-    
     }
     
     
