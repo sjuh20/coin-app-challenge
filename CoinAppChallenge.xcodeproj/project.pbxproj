@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		92A8696927D9282F0008A999 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A8696827D9282F0008A999 /* APICaller.swift */; };
 		92A8696B27D9290B0008A999 /* CryptoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A8696A27D9290B0008A999 /* CryptoTableViewCell.swift */; };
+		92A8696D27D929600008A999 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A8696C27D929600008A999 /* Models.swift */; };
 		B9589FF227D654E5009559D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9589FF127D654E5009559D9 /* AppDelegate.swift */; };
 		B9589FF427D654E5009559D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9589FF327D654E5009559D9 /* SceneDelegate.swift */; };
 		B9589FF627D654E5009559D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9589FF527D654E5009559D9 /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		92A8696827D9282F0008A999 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		92A8696A27D9290B0008A999 /* CryptoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCell.swift; sourceTree = "<group>"; };
+		92A8696C27D929600008A999 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		B9589FEE27D654E5009559D9 /* CoinAppChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinAppChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9589FF127D654E5009559D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9589FF327D654E5009559D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			children = (
 				92A8696827D9282F0008A999 /* APICaller.swift */,
 				92A8696A27D9290B0008A999 /* CryptoTableViewCell.swift */,
+				92A8696C27D929600008A999 /* Models.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				B9589FF627D654E5009559D9 /* ViewController.swift in Sources */,
 				B9589FF227D654E5009559D9 /* AppDelegate.swift in Sources */,
 				B9589FF427D654E5009559D9 /* SceneDelegate.swift in Sources */,
+				92A8696D27D929600008A999 /* Models.swift in Sources */,
 				92A8696B27D9290B0008A999 /* CryptoTableViewCell.swift in Sources */,
 				92A8696927D9282F0008A999 /* APICaller.swift in Sources */,
 			);
