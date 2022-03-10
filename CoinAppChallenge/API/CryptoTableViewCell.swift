@@ -17,17 +17,11 @@ struct CryptoTableViewCellViewModel{
   let iconUrl: URL?
 }
 
-
-
-
-
-
-
-
 class CryptoTableViewCell: UITableViewCell {
 
   static let identifier = "CryptoTableViewCell"
   
+
   private let nameLabel: UILabel = {
     let label = UILabel()
     label.font = .systemFont(ofSize: 20, weight: .medium)
@@ -65,7 +59,7 @@ class CryptoTableViewCell: UITableViewCell {
     contentView.addSubview(symbolLabel)
     contentView.addSubview(priceLabel)
     contentView.addSubview(iconImageView)
-    
+
   }
   
   required init?(coder: NSCoder) {
@@ -77,9 +71,7 @@ class CryptoTableViewCell: UITableViewCell {
     
     let size: CGFloat = contentView.frame.size.height/1.1
     iconImageView.frame = CGRect(x: 20, y: (contentView.frame.size.height-size)/2, width: size, height: size)
-    
-    
-    
+
     nameLabel.sizeToFit()
     priceLabel.sizeToFit()
     symbolLabel.sizeToFit()
@@ -89,6 +81,12 @@ class CryptoTableViewCell: UITableViewCell {
     priceLabel.frame = CGRect(x: contentView.frame.size.width/2, y: 0, width: (contentView.frame.size.width/2)-15, height: contentView.frame.height)
   }
   
+    override func prepareForReuse() {
+        iconImageView.image = nil
+        nameLabel.text = nil
+        symbolLabel.text = nil
+        priceLabel.text = nil
+    }
   func configure(with viewModel: CryptoTableViewCellViewModel){
     nameLabel.text = viewModel.name
     priceLabel.text = viewModel.price

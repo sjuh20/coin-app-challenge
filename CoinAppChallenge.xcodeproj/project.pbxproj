@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
+		2CCD4D1A27D93B2700B46C19 /* DetalhesVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD4D1627D93B2700B46C19 /* DetalhesVc.swift */; };
+		2CCD4D1B27D93B2700B46C19 /* DetalhesViewBlack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD4D1827D93B2700B46C19 /* DetalhesViewBlack.swift */; };
+		2CCD4D1C27D93B2700B46C19 /* DetalhesScrenn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD4D1927D93B2700B46C19 /* DetalhesScrenn.swift */; };
 		92A8696927D9282F0008A999 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A8696827D9282F0008A999 /* APICaller.swift */; };
 		92A8696B27D9290B0008A999 /* CryptoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A8696A27D9290B0008A999 /* CryptoTableViewCell.swift */; };
 		92A8696D27D929600008A999 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A8696C27D929600008A999 /* Models.swift */; };
@@ -41,7 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-
+		2CCD4D1627D93B2700B46C19 /* DetalhesVc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalhesVc.swift; sourceTree = "<group>"; };
+		2CCD4D1827D93B2700B46C19 /* DetalhesViewBlack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalhesViewBlack.swift; sourceTree = "<group>"; };
+		2CCD4D1927D93B2700B46C19 /* DetalhesScrenn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalhesScrenn.swift; sourceTree = "<group>"; };
 		92A8696827D9282F0008A999 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		92A8696A27D9290B0008A999 /* CryptoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCell.swift; sourceTree = "<group>"; };
 		92A8696C27D929600008A999 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -88,6 +92,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CCD4D1427D93B2700B46C19 /* Detalhes */ = {
+			isa = PBXGroup;
+			children = (
+				2CCD4D1527D93B2700B46C19 /* RegisterVc */,
+				2CCD4D1727D93B2700B46C19 /* Screen */,
+			);
+			path = Detalhes;
+			sourceTree = "<group>";
+		};
+		2CCD4D1527D93B2700B46C19 /* RegisterVc */ = {
+			isa = PBXGroup;
+			children = (
+				2CCD4D1627D93B2700B46C19 /* DetalhesVc.swift */,
+			);
+			path = RegisterVc;
+			sourceTree = "<group>";
+		};
+		2CCD4D1727D93B2700B46C19 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				2CCD4D1827D93B2700B46C19 /* DetalhesViewBlack.swift */,
+				2CCD4D1927D93B2700B46C19 /* DetalhesScrenn.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
 		92A8696727D9280B0008A999 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +126,6 @@
 				92A8696C27D929600008A999 /* Models.swift */,
 			);
 			path = API;
-
 			sourceTree = "<group>";
 		};
 		B9589FE527D654E5009559D9 = {
@@ -123,9 +152,8 @@
 		B9589FF027D654E5009559D9 /* CoinAppChallenge */ = {
 			isa = PBXGroup;
 			children = (
-
+				2CCD4D1427D93B2700B46C19 /* Detalhes */,
 				92A8696727D9280B0008A999 /* API */,
-
 				B958A02527D6593B009559D9 /* Coordinator */,
 				B958A02127D655B0009559D9 /* Commons */,
 				B9589FF127D654E5009559D9 /* AppDelegate.swift */,
@@ -297,11 +325,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9589FF627D654E5009559D9 /* ViewController.swift in Sources */,
+				2CCD4D1C27D93B2700B46C19 /* DetalhesScrenn.swift in Sources */,
 				B9589FF227D654E5009559D9 /* AppDelegate.swift in Sources */,
-				2C03B5D527D7D6BD004C9A70 /* DetalhesVc.swift in Sources */,
-				2C03B5D327D7D698004C9A70 /* DetalhesViewBlack.swift in Sources */,
-				2C03B5D127D7D662004C9A70 /* DetalhesScrenn.swift in Sources */,
 				B9589FF427D654E5009559D9 /* SceneDelegate.swift in Sources */,
+				2CCD4D1A27D93B2700B46C19 /* DetalhesVc.swift in Sources */,
+				2CCD4D1B27D93B2700B46C19 /* DetalhesViewBlack.swift in Sources */,
 				92A8696D27D929600008A999 /* Models.swift in Sources */,
 				92A8696B27D9290B0008A999 /* CryptoTableViewCell.swift in Sources */,
 				92A8696927D9282F0008A999 /* APICaller.swift in Sources */,

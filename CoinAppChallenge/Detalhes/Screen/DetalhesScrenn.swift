@@ -95,6 +95,8 @@ class DetalhesScrenn: UIView {
         super.init(frame: frame)
         self.configBackGround()
         self.configSuperView()
+        self.setUpConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -108,6 +110,7 @@ class DetalhesScrenn: UIView {
         self.addSubview(self.adicionarButton)
         self.addSubview(self.nomeLabel)
         self.addSubview(self.valorLabel)
+        self.addSubview(self.viewPreta)
     }
 
     private func configBackGround(){

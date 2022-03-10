@@ -10,6 +10,7 @@ import UIKit
 class DetalhesVc: UIViewController {
 
     var detalhesScrenn: DetalhesScrenn?
+    
     override func loadView() {
         self.detalhesScrenn = DetalhesScrenn()
         self.view = self.detalhesScrenn
@@ -22,7 +23,6 @@ class DetalhesVc: UIViewController {
 
 }
 
-
 extension DetalhesVc: DetalhesScreenProtocol{
     func actionBackButton() {
         print("Back Button !!")
@@ -30,8 +30,8 @@ extension DetalhesVc: DetalhesScreenProtocol{
     }
     
     func actionAdicionarButton() {
-        
+       
     }
     
-    
 }
+

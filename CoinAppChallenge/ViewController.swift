@@ -8,14 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
-
     
-    
-    
+    let detalhes:DetalhesVc = DetalhesVc()
     
     private let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
+//        tableView.backgroundColor = .black
         return tableView
     }()
     
@@ -32,20 +31,16 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     }()
     
     //MARK: -  search
-
-    
-    
-    
-    
-    
+        
     //MARK: - finish search
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = " Cryptomoedas"
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        constraintsTableView()
+        navigationController?.navigationBar.isHidden = true
         
         APICaller.shared.getAllCryptoData {[weak self] result in
             switch result {
@@ -55,7 +50,6 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
                     let price = model.price_usd ?? 0
                     let formatter = ViewController.numberFormatter
                     let priceString = formatter.string(from: NSNumber(value: price))
-                    
                     let iconUrl = URL (string: APICaller.shared.icons.filter({ icon in
                         icon.asset_id == model.asset_id
                     }).first?.url ?? "")
@@ -80,23 +74,34 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         
     }
     
-   
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        tableView.frame = view.bounds
+//    }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+    func constraintsTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-
-        }
+//    override func viewDidAppear(_ animated: Bool) {
+//        self.navigationController?.navigationBar.tintColor = .clear
+//
+//        }
 
     // TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int ) -> Int {
         return viewModels.count
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        self.navigationController?.pushViewController(detalhes, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,9 +115,10 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 90
     }
     
 }
+
 
 
