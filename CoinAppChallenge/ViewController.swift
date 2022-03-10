@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
     
-    let detalhes:DetalhesVc = DetalhesVc()
+    lazy var detalhes:DetalhesVc = DetalhesVc()
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -74,10 +74,10 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        tableView.frame = view.bounds
-//    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
     
     func constraintsTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
