@@ -1,0 +1,8 @@
+# Xcode 
+## Build gerado 
+build/ 
+DerivedData/
+.DS_Store
+## Várias configurações 
+*.pbxuser 
+xcuserdata/
