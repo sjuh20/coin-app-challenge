@@ -64,6 +64,7 @@
 		B9DD898627DB9C3200A1CA53 /* Coins */ = {isa = PBXFileReference; lastKnownFileType = text; name = Coins; path = Modules/Coins; sourceTree = SOURCE_ROOT; };
 		B9DD898727DB9C7100A1CA53 /* Home */ = {isa = PBXFileReference; lastKnownFileType = text; name = Home; path = Modules/Home; sourceTree = SOURCE_ROOT; };
 		B9DD898827DB9CBE00A1CA53 /* Coordinator */ = {isa = PBXFileReference; lastKnownFileType = text; name = Coordinator; path = Modules/Coordinator; sourceTree = SOURCE_ROOT; };
+		B9DD898927DB9CFE00A1CA53 /* Commons */ = {isa = PBXFileReference; lastKnownFileType = text; name = Commons; path = Modules/Commons; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +152,7 @@
 		B9589FF027D654E5009559D9 /* CoinAppChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				B9DD898927DB9CFE00A1CA53 /* Commons */,
 				B9DD898827DB9CBE00A1CA53 /* Coordinator */,
 				B9DD898727DB9C7100A1CA53 /* Home */,
 				B9DD898627DB9C3200A1CA53 /* Coins */,
