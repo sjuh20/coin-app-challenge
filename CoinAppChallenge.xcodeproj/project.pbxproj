@@ -21,6 +21,12 @@
 		B958A00927D654EC009559D9 /* CoinAppChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B958A00827D654EC009559D9 /* CoinAppChallengeTests.swift */; };
 		B958A01327D654EC009559D9 /* CoinAppChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B958A01227D654EC009559D9 /* CoinAppChallengeUITests.swift */; };
 		B958A01527D654EC009559D9 /* CoinAppChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B958A01427D654EC009559D9 /* CoinAppChallengeUITestsLaunchTests.swift */; };
+		B9DD898B27DB9E8000A1CA53 /* CoinDetail in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD898A27DB9E8000A1CA53 /* CoinDetail */; };
+		B9DD898D27DB9E8000A1CA53 /* Coins in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD898C27DB9E8000A1CA53 /* Coins */; };
+		B9DD898F27DB9E8000A1CA53 /* Commons in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD898E27DB9E8000A1CA53 /* Commons */; };
+		B9DD899127DB9E8000A1CA53 /* Coordinator in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD899027DB9E8000A1CA53 /* Coordinator */; };
+		B9DD899327DB9E8000A1CA53 /* Favorites in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD899227DB9E8000A1CA53 /* Favorites */; };
+		B9DD899527DB9E8000A1CA53 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD899427DB9E8000A1CA53 /* Home */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +78,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9DD898F27DB9E8000A1CA53 /* Commons in Frameworks */,
+				B9DD899327DB9E8000A1CA53 /* Favorites in Frameworks */,
+				B9DD898B27DB9E8000A1CA53 /* CoinDetail in Frameworks */,
+				B9DD898D27DB9E8000A1CA53 /* Coins in Frameworks */,
+				B9DD899127DB9E8000A1CA53 /* Coordinator in Frameworks */,
+				B9DD899527DB9E8000A1CA53 /* Home in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +223,12 @@
 			);
 			name = CoinAppChallenge;
 			packageProductDependencies = (
+				B9DD898A27DB9E8000A1CA53 /* CoinDetail */,
+				B9DD898C27DB9E8000A1CA53 /* Coins */,
+				B9DD898E27DB9E8000A1CA53 /* Commons */,
+				B9DD899027DB9E8000A1CA53 /* Coordinator */,
+				B9DD899227DB9E8000A1CA53 /* Favorites */,
+				B9DD899427DB9E8000A1CA53 /* Home */,
 			);
 			productName = CoinAppChallenge;
 			productReference = B9589FEE27D654E5009559D9 /* CoinAppChallenge.app */;
@@ -668,6 +686,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B9DD898A27DB9E8000A1CA53 /* CoinDetail */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoinDetail;
+		};
+		B9DD898C27DB9E8000A1CA53 /* Coins */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Coins;
+		};
+		B9DD898E27DB9E8000A1CA53 /* Commons */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Commons;
+		};
+		B9DD899027DB9E8000A1CA53 /* Coordinator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Coordinator;
+		};
+		B9DD899227DB9E8000A1CA53 /* Favorites */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Favorites;
+		};
+		B9DD899427DB9E8000A1CA53 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9589FE627D654E5009559D9 /* Project object */;
 }

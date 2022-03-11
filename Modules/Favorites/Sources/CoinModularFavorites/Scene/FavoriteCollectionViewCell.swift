@@ -2,7 +2,7 @@
 //  FavoriteCollectionViewCell.swift
 //  
 //
-//  Created by Gustavo Jesus Gomes on 10/03/22.
+//  Created by Ana Brito Souza on 10/03/22.
 //
 
 import UIKit

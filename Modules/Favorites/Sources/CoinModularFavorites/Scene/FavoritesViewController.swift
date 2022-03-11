@@ -2,7 +2,7 @@
 //  FavoritesViewController.swift
 //  
 //
-//  Created by Gustavo Jesus Gomes on 09/03/22.
+//  Created by Ana Brito Souza on 09/03/22.
 //
 
 import UIKit
