@@ -4,21 +4,22 @@
 import PackageDescription
 
 let package = Package(
-    name: "Commons",
+    name: "CoinDetail",
     platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "Commons",
-            targets: ["Commons"]),
+            name: "CoinDetail",
+            targets: ["CoinModularCoinDetail"]),
     ],
     dependencies: [
+        .package(path: "../Commons"),
     ],
     targets: [
         .target(
-            name: "Commons",
-            dependencies: []),
-        .testTarget(
-            name: "CommonsTests",
+            name: "CoinModularCoinDetail",
             dependencies: ["Commons"]),
+        .testTarget(
+            name: "CoinModularCoinDetailTests",
+            dependencies: ["CoinModularCoinDetail"]),
     ]
 )

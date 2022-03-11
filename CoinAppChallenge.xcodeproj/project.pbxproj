@@ -21,8 +21,6 @@
 		B958A00927D654EC009559D9 /* CoinAppChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B958A00827D654EC009559D9 /* CoinAppChallengeTests.swift */; };
 		B958A01327D654EC009559D9 /* CoinAppChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B958A01227D654EC009559D9 /* CoinAppChallengeUITests.swift */; };
 		B958A01527D654EC009559D9 /* CoinAppChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B958A01427D654EC009559D9 /* CoinAppChallengeUITestsLaunchTests.swift */; };
-		B958A02427D655E6009559D9 /* Commons in Frameworks */ = {isa = PBXBuildFile; productRef = B958A02327D655E6009559D9 /* Commons */; };
-		B958A02727D65958009559D9 /* Coordinator in Frameworks */ = {isa = PBXBuildFile; productRef = B958A02627D65958009559D9 /* Coordinator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +59,7 @@
 		B958A00E27D654EC009559D9 /* CoinAppChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinAppChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B958A01227D654EC009559D9 /* CoinAppChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAppChallengeUITests.swift; sourceTree = "<group>"; };
 		B958A01427D654EC009559D9 /* CoinAppChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAppChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B958A02127D655B0009559D9 /* Commons */ = {isa = PBXFileReference; lastKnownFileType = text; name = Commons; path = Packages/Commons; sourceTree = SOURCE_ROOT; };
-		B958A02527D6593B009559D9 /* Coordinator */ = {isa = PBXFileReference; lastKnownFileType = text; name = Coordinator; path = Packages/Coordinator; sourceTree = SOURCE_ROOT; };
+		B9DD898427DB9B6500A1CA53 /* CoinDetail */ = {isa = PBXFileReference; lastKnownFileType = text; name = CoinDetail; path = Modules/CoinDetail; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B958A02427D655E6009559D9 /* Commons in Frameworks */,
-				B958A02727D65958009559D9 /* Coordinator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,10 +147,9 @@
 		B9589FF027D654E5009559D9 /* CoinAppChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				B9DD898427DB9B6500A1CA53 /* CoinDetail */,
 				2CCD4D1427D93B2700B46C19 /* Detalhes */,
 				92A8696727D9280B0008A999 /* API */,
-				B958A02527D6593B009559D9 /* Coordinator */,
-				B958A02127D655B0009559D9 /* Commons */,
 				B9589FF127D654E5009559D9 /* AppDelegate.swift */,
 				B9589FF327D654E5009559D9 /* SceneDelegate.swift */,
 				B9589FF527D654E5009559D9 /* ViewController.swift */,
@@ -207,8 +201,6 @@
 			);
 			name = CoinAppChallenge;
 			packageProductDependencies = (
-				B958A02327D655E6009559D9 /* Commons */,
-				B958A02627D65958009559D9 /* Coordinator */,
 			);
 			productName = CoinAppChallenge;
 			productReference = B9589FEE27D654E5009559D9 /* CoinAppChallenge.app */;
@@ -666,17 +658,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B958A02327D655E6009559D9 /* Commons */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Commons;
-		};
-		B958A02627D65958009559D9 /* Coordinator */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Coordinator;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9589FE627D654E5009559D9 /* Project object */;
 }

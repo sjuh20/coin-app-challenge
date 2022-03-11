@@ -1,11 +1,11 @@
 import XCTest
-@testable import Commons
+@testable import CoinDetail
 
-final class CommonsTests: XCTestCase {
+final class CoinDetailTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(Commons().text, "Hello, World!")
+        XCTAssertEqual(CoinDetail().text, "Hello, World!")
     }
 }
