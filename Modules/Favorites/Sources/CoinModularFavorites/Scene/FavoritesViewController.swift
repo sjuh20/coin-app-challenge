@@ -77,13 +77,15 @@ public class FavoritesViewController: UIViewController {
         
         self.favorites = repository.getFavoriteCoins()
         
-        repository.removeFavoriteCoins(favoriteCoin: coin1)
-        self.favorites = repository.getFavoriteCoins()
+        //        repository.removeFavoriteCoins(favoriteCoin: coin1)
+        //        self.favorites = repository.getFavoriteCoins()
         
         let coinsRepository = CoinsRemoteRepository()
-        coinsRepository.fetchGenreMovies(coinsFavorites: "BTC;USD;PLN;EUR;CNY", completion: {
-            debugPrint("chamou")
-        })
+        coinsRepository.fetchGenreMovies(
+            coinsFavorites: repository.getFavoritesCoinsFormatedString(),
+            completion: {
+                debugPrint("chamou")
+            })
         
     }
     

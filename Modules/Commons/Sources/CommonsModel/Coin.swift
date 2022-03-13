@@ -16,8 +16,9 @@ public struct Coin: Decodable {
     let dataSymbolsCount: Int
     let volumeOneHrsUsd, volumeOneDayUsd: Double
     let volumeOneMthUsd: Int
-    let priceUsd: Double
-    let idIcon, dataStart, dataEnd: String
+    public let priceUsd: Double?
+    public let idIcon: String?
+    let dataStart, dataEnd: String?
     
     enum CodingKeys: String, CodingKey {
         case assetID = "asset_id"
