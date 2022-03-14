@@ -10,14 +10,18 @@ import CommonsModel
 
 public class FavoriteCoinRepository {
     
-    func getFavoritesCoinsFormatedString() -> String {
+    public init() {
+        
+    }
+    
+    public func getFavoritesCoinsFormatedString() -> String {
         let _favoritesCoins: [FavoriteCoin] = getFavoriteCoins()
         return _favoritesCoins.map({(nota:FavoriteCoin) -> String in
             return nota.assetID
         }).joined(separator: ";")
     }
     
-    func getFavoriteCoins() -> [FavoriteCoin] {
+    public func getFavoriteCoins() -> [FavoriteCoin] {
         var favoritesCoins = [FavoriteCoin]()
         
         if let storedObject: Data = UserDefaults.standard.data(forKey: "favorites_coins") {
@@ -39,14 +43,18 @@ public class FavoriteCoinRepository {
         return favoritesCoins
     }
     
-    func addFavoriteCoins(favoriteCoin: FavoriteCoin) {
+    public func addFavoriteCoins(favoriteCoin: FavoriteCoin) {
         var favoritesCoins = getFavoriteCoins()
         favoritesCoins.append(favoriteCoin)
         saveFavoritesCoins(favoritesCoins: favoritesCoins)
-        
     }
     
-    func removeFavoriteCoins(favoriteCoin: FavoriteCoin) {
+    public func coinContainsInFavoritesById(coinId: String) -> Bool {
+        let favoritesCoins = getFavoriteCoins()
+        return favoritesCoins.contains(where: { $0.assetID == coinId })
+    }
+    
+    public func removeFavoriteCoins(favoriteCoin: FavoriteCoin) {
         var favoritesCoins = getFavoriteCoins()
         if let index = favoritesCoins.firstIndex(where: {$0.assetID == favoriteCoin.assetID}) {
             debugPrint(index)
@@ -57,7 +65,7 @@ public class FavoriteCoinRepository {
         saveFavoritesCoins(favoritesCoins: favoritesCoins)
     }
     
-    func clearFavoritesCoins() {
+    public func clearFavoritesCoins() {
         UserDefaults.standard.removeObject(forKey: "favorites_coins")
         UserDefaults.standard.synchronize()
     }

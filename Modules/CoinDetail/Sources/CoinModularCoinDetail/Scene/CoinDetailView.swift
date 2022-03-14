@@ -6,17 +6,18 @@
 //
 
 import UIKit
+import CommonsModel
 
-protocol DetalhesScreenProtocol: AnyObject{
+protocol CoinDetailProtocol: AnyObject{
     func actionBackButton()
-    func actionAdicionarButton()
+    func actionAddButton()
 }
 
-class DetalhesScrenn: UIView {
+class CoinDetailView: UIView {
 
-    weak var delegate:DetalhesScreenProtocol?
+    weak var delegate:CoinDetailProtocol?
     
-    func delegate(delegate:DetalhesScreenProtocol?){
+    func delegate(delegate:CoinDetailProtocol?){
         self.delegate = delegate
     }
     
@@ -39,13 +40,13 @@ class DetalhesScrenn: UIView {
         return button
     }()
     
-    lazy var nomeLabel:UILabel = {
-        let nome = UILabel()
-        nome.translatesAutoresizingMaskIntoConstraints = false
-        nome.textColor = .white
-        nome.font = UIFont.boldSystemFont(ofSize: 14)
-        nome.text = "BTC"
-        return nome
+    lazy var nameLabel:UILabel = {
+        let name = UILabel()
+        name.translatesAutoresizingMaskIntoConstraints = false
+        name.textColor = .white
+        name.font = UIFont.boldSystemFont(ofSize: 14)
+        name.text = "BTC"
+        return name
     }()
     
     lazy var moedaImage: UIImageView = {
@@ -108,7 +109,7 @@ class DetalhesScrenn: UIView {
         self.addSubview(self.backButton)
         self.addSubview(self.moedaImage)
         self.addSubview(self.adicionarButton)
-        self.addSubview(self.nomeLabel)
+        self.addSubview(self.nameLabel)
         self.addSubview(self.valorLabel)
         self.addSubview(self.viewPreta)
     }
@@ -122,7 +123,7 @@ class DetalhesScrenn: UIView {
     }
     
     @objc private func tappedAdicionarButton(sender: UIButton!){
-        self.delegate?.actionAdicionarButton()
+        self.delegate?.actionAddButton()
         if !estrelaImage.isHidden{
             adicionarButton.setTitle("Adicionar", for: .normal)
             estrelaImage.isHidden = true
@@ -135,22 +136,47 @@ class DetalhesScrenn: UIView {
     
     // MARK: - Define as constraints
     
+    func setData(coin: Coin) {
+        self.nameLabel.text = coin.name
+        
+        let priceUsd: Double? = coin.priceUsd
+        if priceUsd != nil {
+            let formatter = NumberFormatter()
+            formatter.locale = Locale(identifier: "en_US")
+            formatter.numberStyle = .currency
+            if let formattedTipAmount = formatter.string(from: priceUsd! as NSNumber) {
+                self.valorLabel.text = "\(formattedTipAmount)"
+            }
+        }
+        else {
+            self.valorLabel.text = "$0.00"
+        }
+        
+        if coin.idIcon != nil {
+            debugPrint(
+                "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
+            self.moedaImage.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
+        }
+        
+        self.viewPreta.setData(coin: coin)
+    }
+    
     private func setUpConstraints(){
         NSLayoutConstraint.activate([
         
-            self.nomeLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.nomeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            self.nameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         
-            self.backButton.topAnchor.constraint(equalTo: self.nomeLabel.topAnchor),
+            self.backButton.topAnchor.constraint(equalTo: self.nameLabel.topAnchor),
             self.backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             
-            self.moedaImage.topAnchor.constraint(equalTo: self.nomeLabel.bottomAnchor, constant: 35),
+            self.moedaImage.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 35),
             self.moedaImage.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 40),
             self.moedaImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             self.moedaImage.heightAnchor.constraint(equalToConstant: 50),
             
             self.valorLabel.topAnchor.constraint(equalTo: self.moedaImage.bottomAnchor, constant: 10),
-            self.valorLabel.centerXAnchor.constraint(equalTo: self.nomeLabel.centerXAnchor),
+            self.valorLabel.centerXAnchor.constraint(equalTo: self.nameLabel.centerXAnchor),
             self.valorLabel.heightAnchor.constraint(equalToConstant: 70),
     
             self.adicionarButton.topAnchor.constraint(equalTo: self.valorLabel.bottomAnchor, constant: 20),
@@ -170,4 +196,20 @@ class DetalhesScrenn: UIView {
         ])
     }
 
+}
+
+extension UIImageView {
+    func load(url: URL?) {
+        DispatchQueue.global().async { [weak self] in
+            if url == nil {
+                debugPrint("Vazio")
+            } else if let data = try? Data(contentsOf: url!) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }

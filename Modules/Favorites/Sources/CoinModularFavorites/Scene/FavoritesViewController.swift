@@ -7,6 +7,8 @@
 
 import UIKit
 import CommonsModel
+import CommonsData
+
 
 public class FavoritesViewController: UIViewController {
     
@@ -80,7 +82,7 @@ public class FavoritesViewController: UIViewController {
         repository.addFavoriteCoins(favoriteCoin: coin5)
         
         let coinsRepository = CoinsRemoteRepository()
-        coinsRepository.fetchGenreMovies(
+        coinsRepository.fetchCoinsFavorites(
             coinsFavorites: repository.getFavoritesCoinsFormatedString(),
             completion: { coins in
                 self.coins = coins
