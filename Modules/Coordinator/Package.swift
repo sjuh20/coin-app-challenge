@@ -16,11 +16,12 @@ let package = Package(
         .package(path: "../Home"),
         .package(path: "../Coins"),
         .package(path: "../Favorites"),
+        .package(path: "../CoinDetail"),
     ],
     targets: [
         .target(
             name: "CoinModularCoordinator",
-            dependencies: ["Commons", "Home", "Coins", "Favorites"]),
+            dependencies: ["Commons", "Home", "Coins", "Favorites", "CoinDetail"]),
         .testTarget(
             name: "CoinModularCoordinatorTests",
             dependencies: ["CoinModularCoordinator"]),

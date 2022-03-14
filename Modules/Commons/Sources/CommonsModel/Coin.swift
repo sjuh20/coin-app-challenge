@@ -9,13 +9,13 @@ import Foundation
 
 public struct Coin: Decodable {
     
-    let assetID, name: String
+    public let assetID, name: String
     let typeIsCrypto: Int
     let dataQuoteStart, dataQuoteEnd, dataOrderbookStart, dataOrderbookEnd: String
     let dataTradeStart, dataTradeEnd: String
     let dataSymbolsCount: Int
     let volumeOneHrsUsd, volumeOneDayUsd: Double
-    let volumeOneMthUsd: Int
+    let volumeOneMthUsd: Double
     public let priceUsd: Double?
     public let idIcon: String?
     let dataStart, dataEnd: String?

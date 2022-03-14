@@ -14,8 +14,7 @@ struct CoinsRemoteRepository {
     
     func fetchGenreMovies(coinsFavorites: String, completion: @escaping([Coin]) -> Void) {
         
-        guard let url = URL(string: "\(ASSETS_FILTER_URL + coinsFavorites)")
-        ) else {
+        guard let url = URL(string: "\(ASSETS_FILTER_URL + coinsFavorites)") else {
             return
         }
         

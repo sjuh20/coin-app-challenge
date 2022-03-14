@@ -6,15 +6,14 @@
 //
 
 import UIKit
+import CoinModularCoinDetail
 
 class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
-    
-    lazy var detalhes:DetalhesVc = DetalhesVc()
-    
+        
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
-//        tableView.backgroundColor = .black
+        //        tableView.backgroundColor = .black
         return tableView
     }()
     
@@ -31,7 +30,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     }()
     
     //MARK: -  search
-        
+    
     //MARK: - finish search
     
     override func viewDidLoad() {
@@ -46,7 +45,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
             switch result {
             case .success(let models):
                 self?.viewModels = models.compactMap({ model in
-                
+                    
                     let price = model.price_usd ?? 0
                     let formatter = ViewController.numberFormatter
                     let priceString = formatter.string(from: NSNumber(value: price))
@@ -54,13 +53,13 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
                         icon.asset_id == model.asset_id
                     }).first?.url ?? "")
                     
-                  return CryptoTableViewCellViewModel(
+                    return CryptoTableViewCellViewModel(
                         name:model.name ?? "N/A",
                         symbol:model.asset_id,
                         price: priceString ?? "N/A",
                         iconUrl: iconUrl
                     )
-               
+                    
                 })
                 
                 DispatchQueue.main.async {
@@ -87,11 +86,11 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        self.navigationController?.navigationBar.tintColor = .clear
-//
-//        }
-
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        self.navigationController?.navigationBar.tintColor = .clear
+    //
+    //        }
+    
     // TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int ) -> Int {
@@ -100,8 +99,8 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        self.navigationController?.pushViewController(detalhes, animated: true)
+        
+//        self.navigationController?.pushViewController(detalhes, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -47,7 +47,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "bitcoin")
         return imageView
     }()
     
