@@ -20,6 +20,7 @@ public class FavoritesViewController: UIViewController {
     }
     
     var favorites = [FavoriteCoin]()
+    var coins = [Coin]()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -43,10 +44,16 @@ public class FavoritesViewController: UIViewController {
         label.addSeparator()
         return label
     }()
+        
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.tabBarController?.tabBar.isHidden = false
+        // Adicionar a chamada da api aqui para sempre atualizar as chamadas
+        debugPrint("RELOAD")
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.addSubview(titleLabel)
         self.view.addSubview(subtitleLabel)
         
@@ -54,8 +61,6 @@ public class FavoritesViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
         
         self.setUpTitleConstraints()
-        self.setUpSubtitleConstraints()
-        self.setUpCollectionViewConstraints()
         
         let repository = FavoriteCoinRepository()
         
@@ -74,16 +79,16 @@ public class FavoritesViewController: UIViewController {
         repository.addFavoriteCoins(favoriteCoin: coin4)
         repository.addFavoriteCoins(favoriteCoin: coin5)
         
-        
-        self.favorites = repository.getFavoriteCoins()
-        
-        repository.removeFavoriteCoins(favoriteCoin: coin1)
-        self.favorites = repository.getFavoriteCoins()
-        
         let coinsRepository = CoinsRemoteRepository()
-        coinsRepository.fetchGenreMovies(coinsFavorites: "BTC;USD;PLN;EUR;CNY", completion: {
-            debugPrint("chamou")
-        })
+        coinsRepository.fetchGenreMovies(
+            coinsFavorites: repository.getFavoritesCoinsFormatedString(),
+            completion: { coins in
+                self.coins = coins
+                self.configureUICollectionView()
+                self.setUpCollectionViewConstraints()
+                self.setUpSubtitleConstraints()
+                debugPrint(coins)
+            })
         
     }
     
@@ -133,17 +138,55 @@ public class FavoritesViewController: UIViewController {
     }
 }
 
+extension UIImageView {
+    func load(url: URL?) {
+        DispatchQueue.global().async { [weak self] in
+            if url == nil {
+                debugPrint("Vazio")
+            } else if let data = try? Data(contentsOf: url!) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
+}
+
 extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favorites.count
+        return coins.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
-        cell.titleLabel.text = self.favorites[indexPath.row].assetID
-        return cell
-    }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
+            let coin = self.coins[indexPath.row]
+            cell.titleLabel.text = coin.name
+            cell.subtitleLabel.text = coin.assetID
+            
+            let priceUsd: Double? = coin.priceUsd
+            if priceUsd != nil {
+                let formatter = NumberFormatter()
+                formatter.locale = Locale(identifier: "en_US")
+                formatter.numberStyle = .currency
+                if let formattedTipAmount = formatter.string(from: priceUsd! as NSNumber) {
+                    cell.value.text = "\(formattedTipAmount)"
+                }
+            }
+            else {
+                cell.value.text = "$0.00"
+            }
+            
+            if coin.idIcon != nil {
+                debugPrint(
+                    "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
+                cell.iconCoin.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
+            }
+            
+            return cell
+        }
     
     public override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         
@@ -153,6 +196,14 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        debugPrint("Item selecionado: \(coins[indexPath.item].assetID)")
+        if self.navigationController != nil {
+            let detailsCoordinator = FavoritesCoordinator(navigationController: self.navigationController!)
+            detailsCoordinator.navigateToDetails(coinId: coins[indexPath.item].assetID)
+        }
     }
     
     @discardableResult

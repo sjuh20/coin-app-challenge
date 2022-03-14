@@ -8,21 +8,13 @@
 import Foundation
 import CommonsModel
 
-enum ResultCoins {
-    case success(coins: [Coin])
-    case failure(error: Error)
-}
-
-enum Error {
-    case parseError(error: String)
-}
-
 struct CoinsRemoteRepository {
     
-    func fetchGenreMovies(coinsFavorites: String, completion: @escaping() -> Void) {
-        let coins = [Coin]()
-        guard let url = URL(string: "https://rest.coinapi.io/v1/assets?filter_asset_id=\(coinsFavorites)"
-        ) else {
+    private let ASSETS_FILTER_URL: String = "https://rest.coinapi.io/v1/assets?filter_asset_id="
+    
+    func fetchGenreMovies(coinsFavorites: String, completion: @escaping([Coin]) -> Void) {
+        
+        guard let url = URL(string: "\(ASSETS_FILTER_URL + coinsFavorites)") else {
             return
         }
         
@@ -32,8 +24,19 @@ struct CoinsRemoteRepository {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
-                print(response)
-                print(String(data: data!, encoding: .utf8))
+                if let error = error {
+                    print("Erro ao consumir o servico: ", error)
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                do {
+                    let coins = try JSONDecoder().decode([Coin].self, from: data)
+                    completion(coins)
+                } catch {
+                    debugPrint(error)
+                }
             }
         }.resume()
         

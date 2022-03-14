@@ -10,6 +10,13 @@ import CommonsModel
 
 public class FavoriteCoinRepository {
     
+    func getFavoritesCoinsFormatedString() -> String {
+        let _favoritesCoins: [FavoriteCoin] = getFavoriteCoins()
+        return _favoritesCoins.map({(nota:FavoriteCoin) -> String in
+            return nota.assetID
+        }).joined(separator: ";")
+    }
+    
     func getFavoriteCoins() -> [FavoriteCoin] {
         var favoritesCoins = [FavoriteCoin]()
         
