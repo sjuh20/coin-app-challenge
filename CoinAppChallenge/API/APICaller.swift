@@ -15,7 +15,7 @@ final class APICaller{
   private var whenReadyBlock: ((Result<[Crypto], Error>) -> Void)?
   
   private struct Constants{
-    static let APIKey = "3C42F2CC-6D84-49A8-8C19-ABA1268338CB"
+    static let APIKey = "A11EF81F-7FDB-4B2A-AF21-6928ED8BBA60"
     static let assetsEndPoint = "https://rest-sandbox.coinapi.io/v1/assets/"
   }
 //https://rest-sandbox.coinapi.io/v1/assets/icons/55/?apikey=F66BC9E3-1683-4988-BBCD-D684ECDDD6BE

@@ -7,118 +7,269 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
-    
-    lazy var detalhes:DetalhesVc = DetalhesVc()
-    
+
+ //   lazy var detalhes:DetalhesVc = DetalhesVc()
+
     private let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero)
+
+        let tableView = UITableView(frame: .zero , style: .plain)
+
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
-//        tableView.backgroundColor = .black
+
+        tableView.backgroundColor = .black
+
         return tableView
+
     }()
+
     
+
     private var viewModels = [CryptoTableViewCellViewModel]()
+
     
+
     static let numberFormatter: NumberFormatter = {
+
         let formatter = NumberFormatter()
+
         formatter.locale = .current
+
         formatter.allowsFloats = true
+
         formatter.numberStyle = .currency
+
         formatter.formatterBehavior = .default
+
         
+
         return formatter
+
     }()
+
     
+
     //MARK: -  search
+
         
+
     //MARK: - finish search
-    
+
+    override var prefersPointerLocked: Bool {
+
+        return true
+
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+
+        return .lightContent
+
+    }
+
     override func viewDidLoad() {
+
         super.viewDidLoad()
+
         view.addSubview(tableView)
+
         tableView.dataSource = self
+
         tableView.delegate = self
+
         constraintsTableView()
+
+
+
         navigationController?.navigationBar.isHidden = true
+
         
+
         APICaller.shared.getAllCryptoData {[weak self] result in
+
             switch result {
+
             case .success(let models):
+
                 self?.viewModels = models.compactMap({ model in
+
                 
+
                     let price = model.price_usd ?? 0
+
                     let formatter = ViewController.numberFormatter
+
                     let priceString = formatter.string(from: NSNumber(value: price))
+
                     let iconUrl = URL (string: APICaller.shared.icons.filter({ icon in
+
                         icon.asset_id == model.asset_id
+
                     }).first?.url ?? "")
+
                     
+
                   return CryptoTableViewCellViewModel(
+
                         name:model.name ?? "N/A",
+
                         symbol:model.asset_id,
+
                         price: priceString ?? "N/A",
+
                         iconUrl: iconUrl
+
                     )
+
                
+
                 })
+
                 
+
                 DispatchQueue.main.async {
+
                     self?.tableView.reloadData()
+
                 }
+
             case .failure(let error):
+
                 print("Error: \(error)")
+
                 
+
             }
+
         }
+
         
+
     }
+
     
+
     override func viewDidLayoutSubviews() {
+
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+
+//        tableView.frame = view.bounds
+
     }
+
     
+
     func constraintsTableView() {
+
+
+
+        
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
+
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
+
+
+
+
     }
+
     
+
 //    override func viewDidAppear(_ animated: Bool) {
+
 //        self.navigationController?.navigationBar.tintColor = .clear
+
 //
+
 //        }
 
+
+
     // TableView
-    
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+            let headerView = UIView.init(frame: CGRect.init(x: 10, y: 0, width: tableView.frame.width, height: 70))
+
+        headerView.backgroundColor = .black
+
+            let label = UILabel()
+
+        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width, height: headerView.frame.height-30)
+            label.textAlignment = .center
+            label.text = "Moeda Digital"
+            label.font = .systemFont(ofSize: 16)
+            label.textColor = .white
+            headerView.addSubview(label)
+
+            return headerView
+
+        }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+            return 50
+
+        }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int ) -> Int {
+
         return viewModels.count
+
         
+
     }
+
     
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        self.navigationController?.pushViewController(detalhes, animated: true)
+
+
+//        self.navigationController?.pushViewController(detalhes, animated: true)
+
     }
+
     
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         guard let cell = tableView.dequeueReusableCell(
+
             withIdentifier: CryptoTableViewCell.identifier, for: indexPath
+
         ) as? CryptoTableViewCell else {
+
             fatalError()
+
         }
+
         cell.configure(with: viewModels[indexPath.row])
+
         return cell
+
     }
+
     
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
         return 90
+
     }
+
     
+
+    
+
 }
-
-
-

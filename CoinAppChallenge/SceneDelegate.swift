@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let vc:ViewController = ViewController()
         let navVC = UINavigationController(rootViewController: vc)
+        navVC.navigationBar.barStyle = .black
         window.rootViewController = navVC
         window.makeKeyAndVisible()
         self.window = window
