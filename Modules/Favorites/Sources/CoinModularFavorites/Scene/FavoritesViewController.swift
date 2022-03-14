@@ -45,6 +45,12 @@ public class FavoritesViewController: UIViewController {
         return label
     }()
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Adicionar a chamada da api aqui para sempre atualizar as chamadas
+        debugPrint("RELOAD")
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
