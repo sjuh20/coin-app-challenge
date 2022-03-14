@@ -26,7 +26,7 @@ public struct CoinsRemoteRepository {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("68C87D3E-C615-4C5E-A080-5995DE794D2E", forHTTPHeaderField: "X-CoinAPI-Key")
+        request.setValue("AEA7C6F6-4FCA-4C45-901E-BF07DD7741B7", forHTTPHeaderField: "X-CoinAPI-Key")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
@@ -56,7 +56,7 @@ public struct CoinsRemoteRepository {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("68C87D3E-C615-4C5E-A080-5995DE794D2E", forHTTPHeaderField: "X-CoinAPI-Key")
+        request.setValue("AEA7C6F6-4FCA-4C45-901E-BF07DD7741B7", forHTTPHeaderField: "X-CoinAPI-Key")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {

@@ -7,10 +7,183 @@
 
 import UIKit
 
-public class CoinsViewController: UIViewController {
+public class CoinsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var isSearch = false
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero , style: .plain)
+        tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
+        tableView.backgroundColor = .black
+        return tableView
+    }()
+
+   private var viewModels = [CryptoTableViewCellViewModel]()
+  //  var filterdTableData = viewModels
+    
+    static let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = .current
+        formatter.allowsFloats = true
+        formatter.numberStyle = .currency
+        formatter.formatterBehavior = .default
+        return formatter
+    }()
+
+  public  override var prefersPointerLocked: Bool {
+        return true
+    }
+
+   public override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
+        APICaller.shared.getAllIcons()
+        view.addSubview(tableView)
+        tableView.dataSource = self
+        tableView.delegate = self
+        constraintsTableView()
+        
+      
+
+       // navigationController?.navigationBar.isHidden = true
+        
+        
+        lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 400, height: 20))
+        searchBar.delegate = self
+        searchBar.placeholder = " Search for a coin ... "
+        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        self.navigationItem.leftBarButtonItem = leftNavBarButton
+        
+        APICaller.shared.getAllCryptoData {[weak self] result in
+            switch result {
+            case .success(let models):
+                self?.viewModels = models.compactMap({ model in
+                    let price = model.price_usd ?? 0
+                    let formatter = CoinsViewController.numberFormatter
+                    let priceString = formatter.string(from: NSNumber(value: price))
+                    let iconUrl = URL (string: APICaller.shared.icons.filter({ icon in
+                        icon.asset_id == model.asset_id
+                    }).first?.url ?? "")
+                  return CryptoTableViewCellViewModel(
+                        name:model.name ?? "N/A",
+                        symbol:model.asset_id,
+                        price: priceString ?? "N/A",
+                        iconUrl: iconUrl
+                    )
+                })
+
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+  public  override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    //        tableView.frame = view.bounds
+    }
+    
+    func constraintsTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        self.navigationController?.navigationBar.tintColor = .clear
+    //
+    //        }
+        // TableView
+    
+   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            let headerView = UIView.init(frame: CGRect.init(x: 10, y: 0, width: tableView.frame.width, height: 70))
+        headerView.backgroundColor = .black
+            let label = UILabel()
+        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width, height: headerView.frame.height-30)
+            label.textAlignment = .center
+            label.text = "Moeda Digital"
+            label.font = .systemFont(ofSize: 16)
+            label.textColor = .white
+            headerView.addSubview(label)
+
+            return headerView
+        }
+
+   public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 50
+        }
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int ) -> Int {
+        return viewModels.count
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.navigationController?.pushViewController(detalhes, animated: true)
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CryptoTableViewCell.identifier, for: indexPath
+        ) as? CryptoTableViewCell else {
+            fatalError()
+        }
+        cell.configure(with: viewModels[indexPath.row])
+        return cell
+    }
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
 }
+
+extension CoinsViewController:UISearchBarDelegate{
+
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+               isSearch = true
+        }
+           
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+               searchBar.resignFirstResponder()
+               isSearch = false
+        }
+           
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+               searchBar.resignFirstResponder()
+               isSearch = false
+        }
+           
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+               searchBar.resignFirstResponder()
+               isSearch = false
+        }
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            if searchText.count == 0 {
+                isSearch = false
+                self.tableView.reloadData()
+            } else {
+     //           for i in 0...viewModels.count {
+    //            if viewModels[i].name.lowercased().contains(searchText.lowercased()) {viewModels.remove(at: i)}
+    //            }
+            }
+                if(viewModels.count == 0){
+                    isSearch = false
+                } else {
+                    isSearch = true
+                }
+                self.tableView.reloadData()
+            }
+        }
+
+
+   
+
+
+
 
