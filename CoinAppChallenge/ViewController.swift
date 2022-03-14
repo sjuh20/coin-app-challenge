@@ -10,6 +10,8 @@ import UIKit
 
 
 class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
+    
+    var isSearch = false
 
  //   lazy var detalhes:DetalhesVc = DetalhesVc()
 
@@ -27,9 +29,8 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
     
 
-    private var viewModels = [CryptoTableViewCellViewModel]()
-
-    
+    var viewModels : [CryptoTableViewCellViewModel] = []
+  //  var filterdTableData = viewModels
 
     static let numberFormatter: NumberFormatter = {
 
@@ -49,13 +50,6 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
     }()
 
-    
-
-    //MARK: -  search
-
-        
-
-    //MARK: - finish search
 
     override var prefersPointerLocked: Bool {
 
@@ -83,10 +77,16 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
 
 
-        navigationController?.navigationBar.isHidden = true
-
+    //    navigationController?.navigationBar.isHidden = true
         
-
+        lazy   var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 400, height: 20))
+        searchBar.delegate = self
+        searchBar.placeholder = " Search for a coin ... "
+        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+          self.navigationItem.leftBarButtonItem = leftNavBarButton
+        
+        
+        
         APICaller.shared.getAllCryptoData {[weak self] result in
 
             switch result {
@@ -123,12 +123,9 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
                     )
 
-               
-
                 })
 
                 
-
                 DispatchQueue.main.async {
 
                     self?.tableView.reloadData()
@@ -139,17 +136,12 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
                 print("Error: \(error)")
 
-                
 
             }
 
         }
 
-        
-
     }
-
-    
 
     override func viewDidLayoutSubviews() {
 
@@ -158,14 +150,8 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 //        tableView.frame = view.bounds
 
     }
-
-    
-
     func constraintsTableView() {
 
-
-
-        
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -177,14 +163,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-
-
-
-
     }
-
-    
-
 //    override func viewDidAppear(_ animated: Bool) {
 
 //        self.navigationController?.navigationBar.tintColor = .clear
@@ -226,11 +205,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
         return viewModels.count
 
-        
-
     }
-
-    
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -239,8 +214,6 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 //        self.navigationController?.pushViewController(detalhes, animated: true)
 
     }
-
-    
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -268,8 +241,47 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
     }
 
-    
-
-    
-
 }
+
+    // MARK: Search Bar
+
+extension ViewController:UISearchBarDelegate{
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+               isSearch = true
+        }
+           
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+               searchBar.resignFirstResponder()
+               isSearch = false
+        }
+           
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+               searchBar.resignFirstResponder()
+               isSearch = false
+        }
+           
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+               searchBar.resignFirstResponder()
+               isSearch = false
+        }
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            if searchText.count == 0 {
+                isSearch = false
+                self.tableView.reloadData()
+            } else {
+                for i in 0...viewModels.count {
+                    if viewModels[i].name.lowercased().contains(searchText.lowercased()) {viewModels.remove(at: i)}
+                }
+                
+            }
+                if(viewModels.count == 0){
+                    isSearch = false
+                } else {
+                    isSearch = true
+                }
+                self.tableView.reloadData()
+            }
+        }
+ 
+
