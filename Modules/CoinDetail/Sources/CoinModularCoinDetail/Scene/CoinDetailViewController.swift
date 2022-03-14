@@ -28,6 +28,8 @@ public class CoinDetailViewController: UIViewController {
     }
     public override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
         self.detalhesScrenn?.delegate(delegate: self)
     }
 }
