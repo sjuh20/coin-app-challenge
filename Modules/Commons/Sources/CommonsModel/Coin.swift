@@ -14,8 +14,8 @@ public struct Coin: Decodable {
     let dataQuoteStart, dataQuoteEnd, dataOrderbookStart, dataOrderbookEnd: String
     let dataTradeStart, dataTradeEnd: String
     let dataSymbolsCount: Int
-    let volumeOneHrsUsd, volumeOneDayUsd: Double
-    let volumeOneMthUsd: Double
+    public let volumeOneHrsUsd, volumeOneDayUsd: Double
+    public let volumeOneMthUsd: Double
     public let priceUsd: Double?
     public let idIcon: String?
     let dataStart, dataEnd: String?

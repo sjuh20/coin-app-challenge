@@ -6,16 +6,17 @@
 //
 
 import UIKit
+import CommonsModel
 
 class DetalhesViewBlack: UIView {
-
+    
     lazy var volumeLabel:UILabel = {
         let valor = UILabel()
         valor.translatesAutoresizingMaskIntoConstraints = false
         valor.textColor = .white
         valor.font = UIFont.boldSystemFont(ofSize: 21)
         valor.text = "volumes negociados"
-
+        
         return valor
     }()
     
@@ -25,17 +26,17 @@ class DetalhesViewBlack: UIView {
         valor.textColor = .white
         valor.font = UIFont.boldSystemFont(ofSize: 17)
         valor.text = "Última Hora"
-
+        
         return valor
     }()
-
+    
     lazy var ultimoMesLabel:UILabel = {
         let valor = UILabel()
         valor.translatesAutoresizingMaskIntoConstraints = false
         valor.textColor = .white
         valor.font = UIFont.boldSystemFont(ofSize: 17)
         valor.text = "Último Mês"
-
+        
         return valor
     }()
     
@@ -48,7 +49,7 @@ class DetalhesViewBlack: UIView {
         
         return valor
     }()
-
+    
     lazy var valorHr:UILabel = {
         let valor = UILabel()
         valor.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +79,25 @@ class DetalhesViewBlack: UIView {
         
         return valor
     }()
-
+    
+    func setData(coin: Coin) {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.numberStyle = .currency
+        
+        if let volumeOneHrsUsd = formatter.string(from: coin.volumeOneHrsUsd as NSNumber) {
+            self.valorHr.text = "\(volumeOneHrsUsd)"
+        }
+        
+        if let volumeOneDayUsd = formatter.string(from: coin.volumeOneDayUsd as NSNumber) {
+            self.valorMes.text = "\(volumeOneDayUsd)"
+        }
+        
+        if let volumeOneMthUsd = formatter.string(from: coin.volumeOneMthUsd as NSNumber) {
+            self.valorAno.text = "\(volumeOneMthUsd)"
+        }
+    }
+    
     private func configSuperViewPreta(){
         self.addSubview(self.volumeLabel)
         self.addSubview(self.ultimaHrLabel)
@@ -92,28 +111,28 @@ class DetalhesViewBlack: UIView {
     
     private func setUpConstraintsView(){
         NSLayoutConstraint.activate([
-        
-        self.volumeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-        self.volumeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-      
-        self.ultimaHrLabel.topAnchor.constraint(equalTo: self.volumeLabel.bottomAnchor, constant: 30),
-        self.ultimaHrLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-        
-        self.ultimoMesLabel.topAnchor.constraint(equalTo: self.ultimaHrLabel.bottomAnchor, constant: 30),
-        self.ultimoMesLabel.leadingAnchor.constraint(equalTo: self.ultimaHrLabel.leadingAnchor),
-        
-        self.ultimoAnoLabel.topAnchor.constraint(equalTo: self.ultimoMesLabel.bottomAnchor, constant: 30),
-        self.ultimoAnoLabel.leadingAnchor.constraint(equalTo: self.ultimaHrLabel.leadingAnchor),
-        
-        self.valorHr.topAnchor.constraint(equalTo: self.ultimaHrLabel.topAnchor),
-        self.valorHr.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-        
-        self.valorMes.topAnchor.constraint(equalTo: self.valorHr.bottomAnchor, constant: 30),
-        self.valorMes.trailingAnchor.constraint(equalTo: self.valorHr.trailingAnchor),
-        
-        self.valorAno.topAnchor.constraint(equalTo: self.valorMes.bottomAnchor, constant: 30),
-        self.valorAno.trailingAnchor.constraint(equalTo: self.valorMes.trailingAnchor),
-        
+            
+            self.volumeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.volumeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+            
+            self.ultimaHrLabel.topAnchor.constraint(equalTo: self.volumeLabel.bottomAnchor, constant: 30),
+            self.ultimaHrLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            
+            self.ultimoMesLabel.topAnchor.constraint(equalTo: self.ultimaHrLabel.bottomAnchor, constant: 30),
+            self.ultimoMesLabel.leadingAnchor.constraint(equalTo: self.ultimaHrLabel.leadingAnchor),
+            
+            self.ultimoAnoLabel.topAnchor.constraint(equalTo: self.ultimoMesLabel.bottomAnchor, constant: 30),
+            self.ultimoAnoLabel.leadingAnchor.constraint(equalTo: self.ultimaHrLabel.leadingAnchor),
+            
+            self.valorHr.topAnchor.constraint(equalTo: self.ultimaHrLabel.topAnchor),
+            self.valorHr.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            
+            self.valorMes.topAnchor.constraint(equalTo: self.valorHr.bottomAnchor, constant: 30),
+            self.valorMes.trailingAnchor.constraint(equalTo: self.valorHr.trailingAnchor),
+            
+            self.valorAno.topAnchor.constraint(equalTo: self.valorMes.bottomAnchor, constant: 30),
+            self.valorAno.trailingAnchor.constraint(equalTo: self.valorMes.trailingAnchor),
+            
         ])}
     
     override init(frame: CGRect) {

@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import CommonsData
 
 public class CoinDetailViewController: UIViewController {
-
+    
     var coinId: String!
-    var detalhesScrenn: DetalhesScrenn?
+    var detalhesScrenn: CoinDetailView?
     
     public init(coinId : String) {
         super.init(nibName: nil, bundle: nil)
@@ -23,9 +24,18 @@ public class CoinDetailViewController: UIViewController {
     
     
     public override func loadView() {
-        self.detalhesScrenn = DetalhesScrenn()
+        self.detalhesScrenn = CoinDetailView()
         self.view = self.detalhesScrenn
+        
+        let coinsRepository = CoinsRemoteRepository()
+        coinsRepository.fetchCoinById(
+            coinId: self.coinId,
+            completion: { coin in
+                debugPrint(coin)
+                self.detalhesScrenn?.setData(coin: coin)
+            })
     }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -34,14 +44,14 @@ public class CoinDetailViewController: UIViewController {
     }
 }
 
-extension CoinDetailViewController: DetalhesScreenProtocol{
+extension CoinDetailViewController: CoinDetailProtocol{
     
     func actionBackButton() {
         print("Back Button !!")
         self.navigationController?.popViewController(animated: true)
     }
     
-    func actionAdicionarButton() {
+    func actionAddButton() {
         
     }
     

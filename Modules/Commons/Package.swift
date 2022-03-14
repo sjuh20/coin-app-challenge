@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "Commons",
-            targets: ["CommonsProtocols", "CommonsModel"]),
+            targets: ["CommonsProtocols", "CommonsModel", "CommonsData"]),
     ],
     dependencies: [],
     targets: [
@@ -25,5 +25,11 @@ let package = Package(
         .testTarget(
             name: "CommonsModelTests",
             dependencies: ["CommonsModel"]),
+        .target(
+            name: "CommonsData",
+            dependencies: []),
+        .testTarget(
+            name: "CommonsDataTests",
+            dependencies: ["CommonsData"]),
     ]
 )
