@@ -9,11 +9,11 @@ import UIKit
 
 
 
-class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
+
+
     
     var isSearch = false
 
- //   lazy var detalhes:DetalhesVc = DetalhesVc()
 
     private let tableView: UITableView = {
 
@@ -21,8 +21,11 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
 
+
         tableView.backgroundColor = .black
 
+
+        //        tableView.backgroundColor = .black
         return tableView
 
     }()
@@ -63,6 +66,13 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
     }
 
+=======
+    
+    //MARK: -  search
+    
+    //MARK: - finish search
+        
+>>>>>>> 9f470fe7eb730c0b8bd5f6e5536d40b20e621d81
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -94,9 +104,13 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
             case .success(let models):
 
                 self?.viewModels = models.compactMap({ model in
+<<<<<<< HEAD
 
                 
 
+=======
+                    
+>>>>>>> 9f470fe7eb730c0b8bd5f6e5536d40b20e621d81
                     let price = model.price_usd ?? 0
 
                     let formatter = ViewController.numberFormatter
@@ -110,9 +124,13 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
                     }).first?.url ?? "")
 
                     
+<<<<<<< HEAD
 
                   return CryptoTableViewCellViewModel(
 
+=======
+                    return CryptoTableViewCellViewModel(
+>>>>>>> 9f470fe7eb730c0b8bd5f6e5536d40b20e621d81
                         name:model.name ?? "N/A",
 
                         symbol:model.asset_id,
@@ -122,7 +140,11 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
                         iconUrl: iconUrl
 
                     )
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 9f470fe7eb730c0b8bd5f6e5536d40b20e621d81
                 })
 
                 
@@ -164,6 +186,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
     }
+<<<<<<< HEAD
 //    override func viewDidAppear(_ animated: Bool) {
 
 //        self.navigationController?.navigationBar.tintColor = .clear
@@ -174,6 +197,14 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
 
 
 
+=======
+    
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        self.navigationController?.navigationBar.tintColor = .clear
+    //
+    //        }
+    
+>>>>>>> 9f470fe7eb730c0b8bd5f6e5536d40b20e621d81
     // TableView
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -208,11 +239,16 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+<<<<<<< HEAD
 
 
 
 //        self.navigationController?.pushViewController(detalhes, animated: true)
 
+=======
+        
+//        self.navigationController?.pushViewController(detalhes, animated: true)
+>>>>>>> 9f470fe7eb730c0b8bd5f6e5536d40b20e621d81
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
