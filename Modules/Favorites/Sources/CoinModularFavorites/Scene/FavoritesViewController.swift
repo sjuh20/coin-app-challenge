@@ -44,16 +44,16 @@ public class FavoritesViewController: UIViewController {
         label.addSeparator()
         return label
     }()
-    
+        
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.tabBarController?.tabBar.isHidden = false
         // Adicionar a chamada da api aqui para sempre atualizar as chamadas
         debugPrint("RELOAD")
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.addSubview(titleLabel)
         self.view.addSubview(subtitleLabel)
         
