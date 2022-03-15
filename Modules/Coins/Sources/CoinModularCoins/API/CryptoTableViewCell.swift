@@ -3,10 +3,7 @@
 //  CryptoTrack
 //
 //  Created by Jonathan Pereira Almeida on 08/03/22.
-//
 
-
-// parei no minuto 24
 
 import UIKit
 

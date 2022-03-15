@@ -36,9 +36,15 @@ public class FavoritesViewController: UIViewController {
     }()
     
     lazy var subtitleLabel: UILabel = {
+        
+        let currentDateTime = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+       
+       let dateTimeString = formatter.string(from: currentDateTime)
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "4 jan 2020"
+        label.text = dateTimeString
         label.font = UIFont(name: "AvenirNext-Medium", size: 12.0) ?? UIFont.systemFont(ofSize: 12.0)
         label.numberOfLines = 1
         label.textColor = UIColor.white
