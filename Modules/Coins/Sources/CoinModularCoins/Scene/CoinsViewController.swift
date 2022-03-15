@@ -5,14 +5,18 @@
 //  Created by Ana Brito Souza on 09/03/22.
 //
 
+import Foundation
 import UIKit
+import CommonsProtocols
+import CoinModularCoinDetail
+
 
 public class CoinsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var isSearch = false
     
     private let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero , style: .plain)
+        let tableView = UITableView(frame: .zero , style: .grouped)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
         tableView.backgroundColor = .black
         return tableView
@@ -50,8 +54,7 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
 
        // navigationController?.navigationBar.isHidden = true
         
-        
-        lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 400, height: 20))
+        lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: -30, width: 400, height: 20))
         searchBar.delegate = self
         searchBar.placeholder = " Search for a coin ... "
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
@@ -91,10 +94,11 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     
     func constraintsTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true    
     }
     
     //    override func viewDidAppear(_ animated: Bool) {
@@ -104,17 +108,32 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
         // TableView
     
    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let headerView = UIView.init(frame: CGRect.init(x: 10, y: 0, width: tableView.frame.width, height: 70))
+            let headerView = UIView.init(frame: CGRect.init(x: 10, y: 0, width: tableView.frame.width, height: 60))
         headerView.backgroundColor = .black
             let label = UILabel()
-        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width, height: headerView.frame.height-30)
+        label.frame = CGRect.init(x: 5, y: -5, width: headerView.frame.width, height: headerView.frame.height-30)
             label.textAlignment = .center
             label.text = "Moeda Digital"
             label.font = .systemFont(ofSize: 16)
             label.textColor = .white
+       
+       let labelData = UILabel()
+       labelData.frame = CGRect.init(x: 1, y: 15, width: headerView.frame.width, height: headerView.frame.height-10)
+       
+       let currentDateTime = Date()
+       let formatter = DateFormatter()
+       formatter.dateStyle = .medium
+      
+      let dateTimeString = formatter.string(from: currentDateTime)
+       labelData.textAlignment = .center
+       labelData.text =  dateTimeString
+       labelData.font = .systemFont(ofSize: 16)
+       labelData.textColor = .white
+       
             headerView.addSubview(label)
-
+            headerView.addSubview(labelData)
             return headerView
+
         }
 
    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -125,7 +144,9 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.navigationController?.pushViewController(detalhes, animated: true)
+//        let detalhes = CoinDetailViewController(coinId: " ")
+//
+//        self.navigationController?.pushViewController(detalhes, animated: false)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

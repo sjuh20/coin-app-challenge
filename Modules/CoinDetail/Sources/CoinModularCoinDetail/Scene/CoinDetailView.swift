@@ -11,6 +11,7 @@ import CommonsModel
 protocol CoinDetailProtocol: AnyObject{
     func actionBackButton()
     func actionAddButton()
+    func actionRemoveButton(coinId: String)
 }
 
 class CoinDetailView: UIView {
@@ -128,9 +129,11 @@ class CoinDetailView: UIView {
             adicionarButton.setTitle("Adicionar", for: .normal)
             estrelaImage.isHidden = true
             
+            
         }else{
         adicionarButton.setTitle("Remover", for: .normal)
         estrelaImage.isHidden = false
+            
         }
     }
     
