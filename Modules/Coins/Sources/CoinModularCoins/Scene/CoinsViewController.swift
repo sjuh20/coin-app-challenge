@@ -103,11 +103,6 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true    
     }
     
-    //    override func viewDidAppear(_ animated: Bool) {
-    //        self.navigationController?.navigationBar.tintColor = .clear
-    //
-    //        }
-        // TableView
     
    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             let headerView = UIView.init(frame: CGRect.init(x: 10, y: 0, width: tableView.frame.width, height: 60))
