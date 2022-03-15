@@ -15,8 +15,14 @@ import CoinModularCoinDetail
 public class CoinsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var isSearch = false
-    
 
+    lazy var coinsView: CoinsView = {
+        let view = CoinsView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero , style: .grouped)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
@@ -47,20 +53,12 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     public override func viewDidLoad() {
         super.viewDidLoad()
         APICaller.shared.getAllIcons()
+        view.addSubview(coinsView)
         view.addSubview(tableView)
+        coinsView.backgroundColor = .black
         tableView.dataSource = self
         tableView.delegate = self
         constraintsTableView()
-        
-      
-
-       // navigationController?.navigationBar.isHidden = true
-        
-        lazy var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: -30, width: 400, height: 20))
-        searchBar.delegate = self
-        searchBar.placeholder = " Search for a coin ... "
-        let leftNavBarButton = UIBarButtonItem(customView:searchBar)
-        self.navigationItem.leftBarButtonItem = leftNavBarButton
         
         APICaller.shared.getAllCryptoData {[weak self] result in
             switch result {
@@ -95,12 +93,18 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func constraintsTableView() {
+        coinsView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        coinsView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        coinsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        coinsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        coinsView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        
+        tableView.topAnchor.constraint(equalTo: coinsView.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true    
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     
