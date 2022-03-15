@@ -8,8 +8,8 @@
 import Foundation
 import CommonsProtocols
 import UIKit
-import CoinModularCoins
 import CoinModularCoinDetail
+
 
 class ViewModel<T> {
     let model: T

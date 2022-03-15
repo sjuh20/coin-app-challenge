@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CommonsProtocols
+import CommonsData
 import CoinModularCoinDetail
 
 
@@ -15,6 +16,7 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     
     var isSearch = false
     
+
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero , style: .grouped)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier:CryptoTableViewCell.identifier)
@@ -144,9 +146,7 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let detalhes = CoinDetailViewController(coinId: " ")
-//
-//        self.navigationController?.pushViewController(detalhes, animated: false)
+        
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
