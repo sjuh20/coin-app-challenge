@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CoinsView: UIView {
+class CoinsView: UIView, UISearchBarDelegate {
 
     lazy var tituloLabel:UILabel = {
         let valor = UILabel()
@@ -47,5 +47,40 @@ class CoinsView: UIView {
        return searchBar
 
      }()
+    
+    private func configCoinsView(){
+        addSubview(tituloLabel)
+        addSubview(dataLabel)
+        addSubview(searchBar)
+        searchBar.delegate = self
+    }
+    
+    private func setUpConstraintsView(){
+        NSLayoutConstraint.activate([
+            
+            
+            self.tituloLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.tituloLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40),
+            
+            self.dataLabel.topAnchor.constraint(equalTo: self.tituloLabel.bottomAnchor, constant: 10),
+            self.dataLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//
+            self.searchBar.topAnchor.constraint(equalTo: self.dataLabel.bottomAnchor,constant: 20),
+            self.searchBar.centerXAnchor.constraint(equalTo: centerXAnchor),
+            self.searchBar.widthAnchor.constraint(equalToConstant: 320),
+            self.searchBar.heightAnchor.constraint(equalToConstant: 60)
+            
+        ])}
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .black
+        self.configCoinsView()
+        self.setUpConstraintsView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
 }

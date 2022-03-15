@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import CommonsProtocols
 import CommonsData
-import CoinModularCoinDetail
 
 
 public class CoinsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -107,35 +106,6 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    
-   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let headerView = UIView.init(frame: CGRect.init(x: 10, y: 0, width: tableView.frame.width, height: 60))
-        headerView.backgroundColor = .black
-            let label = UILabel()
-        label.frame = CGRect.init(x: 5, y: -5, width: headerView.frame.width, height: headerView.frame.height-30)
-            label.textAlignment = .center
-            label.text = "Moeda Digital"
-            label.font = .systemFont(ofSize: 16)
-            label.textColor = .white
-       
-       let labelData = UILabel()
-       labelData.frame = CGRect.init(x: 1, y: 15, width: headerView.frame.width, height: headerView.frame.height-10)
-       
-       let currentDateTime = Date()
-       let formatter = DateFormatter()
-       formatter.dateStyle = .medium
-      
-      let dateTimeString = formatter.string(from: currentDateTime)
-       labelData.textAlignment = .center
-       labelData.text =  dateTimeString
-       labelData.font = .systemFont(ofSize: 16)
-       labelData.textColor = .white
-       
-            headerView.addSubview(label)
-            headerView.addSubview(labelData)
-            return headerView
-
-        }
 
    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
             return 50

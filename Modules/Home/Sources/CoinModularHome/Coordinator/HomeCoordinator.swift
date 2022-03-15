@@ -24,7 +24,7 @@ public final class HomeCoordinator : Coordinator {
         let homeBar = UITabBarController()
         let coinsViewController = UINavigationController(rootViewController: CoinsViewController())
         let favoritesViewController = UINavigationController(rootViewController: FavoritesViewController())
-        homeBar.tabBar.backgroundColor = .darkGray
+        homeBar.tabBar.backgroundColor = .black
         homeBar.setViewControllers([coinsViewController, favoritesViewController], animated: false)
         
         guard let items = homeBar.tabBar.items else {
@@ -33,7 +33,7 @@ public final class HomeCoordinator : Coordinator {
         
         let images = ["dollarsign.square", "star.fill"]
         let titles = ["Moedas", "Favoritas"]
-        
+    
         for x in 0..<items.count {
             items[x].image = UIImage(systemName: images[x])
             items[x].title = titles[x]

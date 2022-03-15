@@ -39,7 +39,7 @@ public class FavoritesViewController: UIViewController {
         
         let currentDateTime = Date()
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
+        formatter.dateFormat = "dd MMM yyyy"
        
        let dateTimeString = formatter.string(from: currentDateTime)
         let label = UILabel()
