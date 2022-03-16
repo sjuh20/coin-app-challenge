@@ -132,9 +132,20 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        var coinId = ""
+        
+        if isSearch {
+            coinId = dadosFiltrados[indexPath.row].symbol
+            
+        }else {
+            coinId = viewModels[indexPath.row].symbol
+        }
+        
         if self.navigationController != nil {
-            CoinsCoordinator(navigationController: self.navigationController!).navigateToDetails(coinId: viewModels[indexPath.row].symbol)
-        } else{return} 
+            CoinsCoordinator(navigationController: self.navigationController!).navigateToDetails(coinId: coinId)
+        } else{return}
+        
+       
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
