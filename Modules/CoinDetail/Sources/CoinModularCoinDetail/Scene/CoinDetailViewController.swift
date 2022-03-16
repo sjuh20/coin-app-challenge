@@ -42,6 +42,14 @@ public class CoinDetailViewController: UIViewController {
         self.navigationController?.tabBarController?.tabBar.isHidden = true
         self.detalhesScrenn?.delegate(delegate: self)
     }
+    
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 }
 
 extension CoinDetailViewController: CoinDetailProtocol{

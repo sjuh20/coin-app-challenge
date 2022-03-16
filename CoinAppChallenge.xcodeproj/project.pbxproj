@@ -24,6 +24,7 @@
 		B9DD899127DB9E8000A1CA53 /* Coordinator in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD899027DB9E8000A1CA53 /* Coordinator */; };
 		B9DD899327DB9E8000A1CA53 /* Favorites in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD899227DB9E8000A1CA53 /* Favorites */; };
 		B9DD899527DB9E8000A1CA53 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD899427DB9E8000A1CA53 /* Home */; };
+		B9DD899827DF6FDD00A1CA53 /* Error in Frameworks */ = {isa = PBXBuildFile; productRef = B9DD899727DF6FDD00A1CA53 /* Error */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		B9DD898727DB9C7100A1CA53 /* Home */ = {isa = PBXFileReference; lastKnownFileType = text; name = Home; path = Modules/Home; sourceTree = SOURCE_ROOT; };
 		B9DD898827DB9CBE00A1CA53 /* Coordinator */ = {isa = PBXFileReference; lastKnownFileType = text; name = Coordinator; path = Modules/Coordinator; sourceTree = SOURCE_ROOT; };
 		B9DD898927DB9CFE00A1CA53 /* Commons */ = {isa = PBXFileReference; lastKnownFileType = text; name = Commons; path = Modules/Commons; sourceTree = SOURCE_ROOT; };
+		B9DD899627DF6E2B00A1CA53 /* Error */ = {isa = PBXFileReference; lastKnownFileType = text; name = Error; path = Modules/Error; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9DD899827DF6FDD00A1CA53 /* Error in Frameworks */,
 				B9DD898F27DB9E8000A1CA53 /* Commons in Frameworks */,
 				B9DD899327DB9E8000A1CA53 /* Favorites in Frameworks */,
 				B9DD898B27DB9E8000A1CA53 /* CoinDetail in Frameworks */,
@@ -132,6 +135,7 @@
 		B9589FF027D654E5009559D9 /* CoinAppChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				B9DD899627DF6E2B00A1CA53 /* Error */,
 				B9DD898927DB9CFE00A1CA53 /* Commons */,
 				B9DD898827DB9CBE00A1CA53 /* Coordinator */,
 				B9DD898727DB9C7100A1CA53 /* Home */,
@@ -196,6 +200,7 @@
 				B9DD899027DB9E8000A1CA53 /* Coordinator */,
 				B9DD899227DB9E8000A1CA53 /* Favorites */,
 				B9DD899427DB9E8000A1CA53 /* Home */,
+				B9DD899727DF6FDD00A1CA53 /* Error */,
 			);
 			productName = CoinAppChallenge;
 			productReference = B9589FEE27D654E5009559D9 /* CoinAppChallenge.app */;
@@ -675,6 +680,10 @@
 		B9DD899427DB9E8000A1CA53 /* Home */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Home;
+		};
+		B9DD899727DF6FDD00A1CA53 /* Error */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Error;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
