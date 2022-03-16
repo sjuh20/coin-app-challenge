@@ -51,6 +51,7 @@ class CryptoTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.image = UIImage(systemName: "star.fill")
         image.contentMode = .scaleAspectFit
+        image.tintColor = .white
         return image
     }()
     
@@ -81,7 +82,7 @@ class CryptoTableViewCell: UITableViewCell {
         symbolLabel.sizeToFit()
         
         nameLabel.frame = CGRect(x: 10 + size, y: 10, width: nameLabel.frame.size.width, height: 15)
-        starImageView.frame = CGRect(x: nameLabel.frame.size.width, y: 10, width: contentView.frame.size.width/2, height: 15)
+        starImageView.frame = CGRect(x: nameLabel.frame.size.width + 10, y: 10, width: contentView.frame.size.width/2, height: 15)
         symbolLabel.frame = CGRect(x: 10 + size, y: nameLabel.frame.size.height + 25, width: contentView.frame.size.width/2, height: 15)
         priceLabel.frame = CGRect(x: contentView.frame.size.width/2, y: 0, width: (contentView.frame.size.width/2)-15, height: 40)
     }
@@ -105,7 +106,7 @@ class CryptoTableViewCell: UITableViewCell {
         
         
         if viewModel.iconUrl?.absoluteString == nil {
-            self.iconImageView.image = UIImage(named: "bitcoin")
+            self.iconImageView.image = UIImage(named: "inter")
         } else
         
         if let url = viewModel.iconUrl {
