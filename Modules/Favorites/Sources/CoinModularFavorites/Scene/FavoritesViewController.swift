@@ -57,6 +57,16 @@ public class FavoritesViewController: UIViewController {
         super.viewDidAppear(animated)
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         // Adicionar a chamada da api aqui para sempre atualizar as chamadas
+        let repository = FavoriteCoinRepository()
+        let coinsRepository = CoinsRemoteRepository()
+        coinsRepository.fetchCoinsFavorites(
+            coinsFavorites: repository.getFavoritesCoinsFormatedString(),
+            completion: { coins in
+                self.coins = coins
+                self.collectionView.reloadData()
+                debugPrint(coins)
+            })
+        
         debugPrint("RELOAD")
     }
     
@@ -69,24 +79,7 @@ public class FavoritesViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
         
         self.setUpTitleConstraints()
-        
         let repository = FavoriteCoinRepository()
-        
-        repository.clearFavoritesCoins()
-        
-        let coin1 = FavoriteCoin("BTC")
-        let coin2 = FavoriteCoin("USD")
-        let coin3 = FavoriteCoin("CNY")
-        let coin4 = FavoriteCoin("EUR")
-        let coin5 = FavoriteCoin("PLN")
-        
-        
-        repository.addFavoriteCoins(favoriteCoin: coin1)
-        repository.addFavoriteCoins(favoriteCoin: coin2)
-        repository.addFavoriteCoins(favoriteCoin: coin3)
-        repository.addFavoriteCoins(favoriteCoin: coin4)
-        repository.addFavoriteCoins(favoriteCoin: coin5)
-        
         let coinsRepository = CoinsRemoteRepository()
         coinsRepository.fetchCoinsFavorites(
             coinsFavorites: repository.getFavoritesCoinsFormatedString(),

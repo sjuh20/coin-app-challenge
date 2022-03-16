@@ -36,6 +36,9 @@ public class CoinDetailViewController: UIViewController {
                 debugPrint(coin)
                 self.detalhesScrenn?.setData(coin: coin)
             })
+        
+        let result = repository?.coinContainsInFavoritesById(coinId: self.coinId)
+        self.detalhesScrenn?.setIsFavorite(isFavorite: result ?? false)
     }
     
     public override func viewDidLoad() {
@@ -43,6 +46,9 @@ public class CoinDetailViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.tabBarController?.tabBar.isHidden = true
         self.detalhesScrenn?.delegate(delegate: self)
+        self.detalhesScrenn?.setCoinId(coinId: coinId)
+        
+        repository = FavoriteCoinRepository()
     }
     
     
@@ -61,7 +67,7 @@ extension CoinDetailViewController: CoinDetailProtocol{
         self.navigationController?.popViewController(animated: true)
     }
     
-    func actionAddButton() {
+    func actionAddButton(coinId:String) {
         self.repository?.addFavoriteCoins(favoriteCoin: FavoriteCoin(coinId))
     }
     

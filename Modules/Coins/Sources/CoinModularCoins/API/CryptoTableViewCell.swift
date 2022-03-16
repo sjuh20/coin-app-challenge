@@ -87,11 +87,18 @@ class CryptoTableViewCell: UITableViewCell {
         nameLabel.text = viewModel.name
         priceLabel.text = viewModel.price
         symbolLabel.text = viewModel.symbol
+        debugPrint("absoluteString: \(viewModel.iconUrl?.absoluteString ?? "Vazio")")
         
-        if let url = viewModel.iconUrl{
+        
+        if viewModel.iconUrl?.absoluteString == nil {
+            self.iconImageView.image = UIImage(named: "bitcoin")
+        } else
+        
+        if let url = viewModel.iconUrl {
             let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
                 if let data = data {
                     DispatchQueue.main.async {
+                        debugPrint(data)
                         self?.iconImageView.image = UIImage(data: data)
                     }
                 }

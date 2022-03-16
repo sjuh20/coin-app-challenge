@@ -10,16 +10,26 @@ import CommonsModel
 
 protocol CoinDetailProtocol: AnyObject{
     func actionBackButton()
-    func actionAddButton()
+    func actionAddButton(coinId: String)
     func actionRemoveButton(coinId: String)
 }
 
 class CoinDetailView: UIView {
-
-    weak var delegate:CoinDetailProtocol?
     
-    func delegate(delegate:CoinDetailProtocol?){
+    weak var delegate: CoinDetailProtocol?
+    var coinId: String?
+    var isFavorite: Bool = false
+    
+    func delegate(delegate: CoinDetailProtocol?){
         self.delegate = delegate
+    }
+    
+    func setCoinId(coinId: String) {
+        self.coinId = coinId
+    }
+    
+    func setIsFavorite(isFavorite: Bool) {
+        self.isFavorite = isFavorite
     }
     
     public var viewPreta: DetalhesViewBlack = {
@@ -55,7 +65,7 @@ class CoinDetailView: UIView {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage (named:  "bitcoin")
         image.contentMode = .scaleAspectFit
-
+        
         return image
     }()
     
@@ -114,25 +124,25 @@ class CoinDetailView: UIView {
         self.addSubview(self.valorLabel)
         self.addSubview(self.viewPreta)
     }
-
+    
     private func configBackGround(){
         self.backgroundColor = UIColor(red: 141/255, green: 149/255, blue: 98/255, alpha: 1.0)
     }
-   
+    
     @objc private func tappedBackButton(){
         self.delegate?.actionBackButton()
     }
     
     @objc private func tappedAdicionarButton(sender: UIButton!){
-        self.delegate?.actionAddButton()
-        if !estrelaImage.isHidden{
+        
+        if !isFavorite {
             adicionarButton.setTitle("Adicionar", for: .normal)
             estrelaImage.isHidden = true
-            
-            
+            self.delegate?.actionAddButton(coinId: self.coinId ?? "")
         }else{
-        adicionarButton.setTitle("Remover", for: .normal)
-        estrelaImage.isHidden = false
+            adicionarButton.setTitle("Remover", for: .normal)
+            estrelaImage.isHidden = false
+            self.delegate?.actionRemoveButton(coinId: self.coinId ?? "")
             
         }
     }
@@ -166,10 +176,10 @@ class CoinDetailView: UIView {
     
     private func setUpConstraints(){
         NSLayoutConstraint.activate([
-        
+            
             self.nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
             self.nameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-        
+            
             self.backButton.topAnchor.constraint(equalTo: self.nameLabel.topAnchor),
             self.backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             
@@ -181,12 +191,12 @@ class CoinDetailView: UIView {
             self.valorLabel.topAnchor.constraint(equalTo: self.moedaImage.bottomAnchor, constant: 10),
             self.valorLabel.centerXAnchor.constraint(equalTo: self.nameLabel.centerXAnchor),
             self.valorLabel.heightAnchor.constraint(equalToConstant: 70),
-    
+            
             self.adicionarButton.topAnchor.constraint(equalTo: self.valorLabel.bottomAnchor, constant: 20),
             self.adicionarButton.leadingAnchor.constraint(equalTo: self.leadingAnchor , constant: 30),
             self.adicionarButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -30),
             self.adicionarButton.heightAnchor.constraint(equalToConstant: 50),
-
+            
             self.viewPreta.topAnchor.constraint(equalTo: self.adicionarButton.bottomAnchor, constant: 40),
             self.viewPreta.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.viewPreta.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -198,7 +208,7 @@ class CoinDetailView: UIView {
             self.estrelaImage.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
-
+    
 }
 
 extension UIImageView {
