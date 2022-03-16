@@ -25,6 +25,5 @@ public final class FavoritesCoordinator : Coordinator {
     
     public func navigateToDetails(coinId: String) {
         self.navigationController.pushViewController(CoinDetailViewController(coinId: coinId), animated: false)
-    }
-    
+    } 
 }
