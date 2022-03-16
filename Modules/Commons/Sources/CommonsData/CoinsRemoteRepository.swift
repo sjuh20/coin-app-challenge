@@ -34,7 +34,6 @@ public struct CoinsRemoteRepository {
                     print("Erro ao consumir o servico: ", error)
                     return
                 }
-                debugPrint(response)
                 guard let data = data else {return}
                 
                 do {

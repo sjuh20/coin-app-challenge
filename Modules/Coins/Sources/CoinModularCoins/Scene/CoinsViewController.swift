@@ -54,6 +54,7 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.tabBarController?.tabBar.isHidden = false
+        self.tableView.reloadData()
     }
     
     public override func viewDidLoad() {
@@ -94,6 +95,8 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
+    
+   
     
     public  override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

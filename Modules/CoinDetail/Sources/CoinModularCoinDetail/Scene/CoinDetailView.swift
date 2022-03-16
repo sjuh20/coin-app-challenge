@@ -134,16 +134,16 @@ class CoinDetailView: UIView {
     }
     
     @objc private func tappedAdicionarButton(sender: UIButton!){
-        
-        if !isFavorite {
-            adicionarButton.setTitle("Adicionar", for: .normal)
-            estrelaImage.isHidden = true
+        if !self.isFavorite {
             self.delegate?.actionAddButton(coinId: self.coinId ?? "")
+            self.adicionarButton.setTitle("Remover", for: .normal)
+            self.estrelaImage.isHidden = false
+            self.isFavorite = !self.isFavorite
         }else{
-            adicionarButton.setTitle("Remover", for: .normal)
-            estrelaImage.isHidden = false
             self.delegate?.actionRemoveButton(coinId: self.coinId ?? "")
-            
+            self.adicionarButton.setTitle("Adicionar", for: .normal)
+            self.estrelaImage.isHidden = true
+            self.isFavorite = !self.isFavorite
         }
     }
     
@@ -151,6 +151,14 @@ class CoinDetailView: UIView {
     
     func setData(coin: Coin) {
         self.nameLabel.text = coin.name
+        
+        if !isFavorite {
+            self.adicionarButton.setTitle("Adicionar", for: .normal)
+            self.estrelaImage.isHidden = true
+        }else{
+            self.adicionarButton.setTitle("Remover", for: .normal)
+            self.estrelaImage.isHidden = false
+        }
         
         let priceUsd: Double? = coin.priceUsd
         if priceUsd != nil {
@@ -166,8 +174,6 @@ class CoinDetailView: UIView {
         }
         
         if coin.idIcon != nil {
-            debugPrint(
-                "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
             self.moedaImage.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
         }
         
@@ -215,7 +221,7 @@ extension UIImageView {
     func load(url: URL?) {
         DispatchQueue.global().async { [weak self] in
             if url == nil {
-                debugPrint("Vazio")
+                self?.image = UIImage(named: "bitcoin")
             } else if let data = try? Data(contentsOf: url!) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {

@@ -64,10 +64,7 @@ public class FavoritesViewController: UIViewController {
             completion: { coins in
                 self.coins = coins
                 self.collectionView.reloadData()
-                debugPrint(coins)
             })
-        
-        debugPrint("RELOAD")
     }
     
     public override func viewDidLoad() {
@@ -88,7 +85,6 @@ public class FavoritesViewController: UIViewController {
                 self.configureUICollectionView()
                 self.setUpCollectionViewConstraints()
                 self.setUpSubtitleConstraints()
-                debugPrint(coins)
             })
         
     }
@@ -143,7 +139,7 @@ extension UIImageView {
     func load(url: URL?) {
         DispatchQueue.global().async { [weak self] in
             if url == nil {
-                debugPrint("Vazio")
+                self?.image = UIImage(named: "bitcoin")
             } else if let data = try? Data(contentsOf: url!) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
@@ -181,8 +177,6 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         
         if coin.idIcon != nil {
-            debugPrint(
-                "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
             cell.iconCoin.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
         }
         
@@ -200,7 +194,6 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        debugPrint("Item selecionado: \(coins[indexPath.item].assetID)")
         if self.navigationController != nil {
             let detailsCoordinator = FavoritesCoordinator(navigationController: self.navigationController!)
             detailsCoordinator.navigateToDetails(coinId: coins[indexPath.item].assetID)

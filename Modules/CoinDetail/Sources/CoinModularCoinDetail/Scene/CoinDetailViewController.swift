@@ -27,18 +27,19 @@ public class CoinDetailViewController: UIViewController {
     
     public override func loadView() {
         self.detalhesScrenn = CoinDetailView()
-        self.view = self.detalhesScrenn
+        
+        repository = FavoriteCoinRepository()
+        let result = repository?.coinContainsInFavoritesById(coinId: self.coinId)
+        self.detalhesScrenn?.setIsFavorite(isFavorite: result ?? false)
         
         let coinsRepository = CoinsRemoteRepository()
         coinsRepository.fetchCoinById(
             coinId: self.coinId,
             completion: { coin in
-                debugPrint(coin)
                 self.detalhesScrenn?.setData(coin: coin)
             })
         
-        let result = repository?.coinContainsInFavoritesById(coinId: self.coinId)
-        self.detalhesScrenn?.setIsFavorite(isFavorite: result ?? false)
+        self.view = self.detalhesScrenn
     }
     
     public override func viewDidLoad() {
