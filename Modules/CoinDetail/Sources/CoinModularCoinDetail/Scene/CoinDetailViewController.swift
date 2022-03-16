@@ -7,11 +7,13 @@
 
 import UIKit
 import CommonsData
+import CommonsModel
 
 public class CoinDetailViewController: UIViewController {
     
     var coinId: String!
     var detalhesScrenn: CoinDetailView?
+    var repository: FavoriteCoinRepository?
     
     public init(coinId : String) {
         super.init(nibName: nil, bundle: nil)
@@ -60,8 +62,11 @@ extension CoinDetailViewController: CoinDetailProtocol{
     }
     
     func actionAddButton() {
-        
+        self.repository?.addFavoriteCoins(favoriteCoin: FavoriteCoin(coinId))
     }
     
+    func actionRemoveButton(coinId: String) {
+        self.repository?.removeFavoriteCoins(favoriteCoin: FavoriteCoin(coinId))
+    }
 }
 

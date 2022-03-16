@@ -15,10 +15,11 @@ final class APICaller{
   private var whenReadyBlock: ((Result<[Crypto], Error>) -> Void)?
   
   private struct Constants{
-    static let APIKey = "3C42F2CC-6D84-49A8-8C19-ABA1268338CB"
+    static let APIKey = "AEA7C6F6-4FCA-4C45-901E-BF07DD7741B7"
     static let assetsEndPoint = "https://rest-sandbox.coinapi.io/v1/assets/"
   }
-//https://rest-sandbox.coinapi.io/v1/assets/icons/55/?apikey=F66BC9E3-1683-4988-BBCD-D684ECDDD6BE
+//https://rest-sandbox.coinapi.io/v1/assets/?apikey=D202342D-AA18-4966-A29F-21B09FC5C9AD
+//https://rest-sandbox.coinapi.io/v1/assets/icons/55/?apikey=AEA7C6F6-4FCA-4C45-901E-BF07DD7741B7
 //https://rest.coinapi.io/v1/assets/icons/55/?apikey=F66BC9E3-1683-4988-BBCD-D684ECDDD6BE
   private init() {}
   
@@ -55,7 +56,7 @@ final class APICaller{
   
   
   func getAllIcons(){
-    guard let url = URL(string: "https://rest.coinapi.io/v1/assets/icons/55/?apikey=F66BC9E3-1683-4988-BBCD-D684ECDDD6BE") else { return }
+    guard let url = URL(string: "https://rest.coinapi.io/v1/assets/icons/55/?apikey=AEA7C6F6-4FCA-4C45-901E-BF07DD7741B7") else { return }
     let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
       guard let data = data, error == nil else { return }
       
