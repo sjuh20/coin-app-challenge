@@ -40,8 +40,8 @@ public class FavoritesViewController: UIViewController {
         let currentDateTime = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM yyyy"
-       
-       let dateTimeString = formatter.string(from: currentDateTime)
+        
+        let dateTimeString = formatter.string(from: currentDateTime)
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = dateTimeString
@@ -52,7 +52,7 @@ public class FavoritesViewController: UIViewController {
         label.addSeparator()
         return label
     }()
-        
+    
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.tabBarController?.tabBar.isHidden = false
@@ -169,32 +169,32 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
-            let coin = self.coins[indexPath.row]
-            cell.titleLabel.text = coin.name
-            cell.subtitleLabel.text = coin.assetID
-            
-            let priceUsd: Double? = coin.priceUsd
-            if priceUsd != nil {
-                let formatter = NumberFormatter()
-                formatter.locale = Locale(identifier: "en_US")
-                formatter.numberStyle = .currency
-                if let formattedTipAmount = formatter.string(from: priceUsd! as NSNumber) {
-                    cell.value.text = "\(formattedTipAmount)"
-                }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
+        let coin = self.coins[indexPath.row]
+        cell.titleLabel.text = coin.name
+        cell.subtitleLabel.text = coin.assetID
+        
+        let priceUsd: Double? = coin.priceUsd
+        if priceUsd != nil {
+            let formatter = NumberFormatter()
+            formatter.locale = Locale(identifier: "en_US")
+            formatter.numberStyle = .currency
+            if let formattedTipAmount = formatter.string(from: priceUsd! as NSNumber) {
+                cell.value.text = "\(formattedTipAmount)"
             }
-            else {
-                cell.value.text = "$0.00"
-            }
-            
-            if coin.idIcon != nil {
-                debugPrint(
-                    "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
-                cell.iconCoin.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
-            }
-            
-            return cell
         }
+        else {
+            cell.value.text = "$0.00"
+        }
+        
+        if coin.idIcon != nil {
+            debugPrint(
+                "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
+            cell.iconCoin.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
+        }
+        
+        return cell
+    }
     
     public override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         

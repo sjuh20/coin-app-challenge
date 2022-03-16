@@ -101,8 +101,8 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         iconCoin.frame = CGRect(x: self.contentView.frame.width - 30,
                                 y: self.contentView.frame.minY - 5,
-                                width: 36,
-                                height: 36)
+                                width: 25,
+                                height: 25)
         
     }
 }

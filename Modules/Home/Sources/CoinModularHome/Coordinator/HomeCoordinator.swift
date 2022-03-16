@@ -33,14 +33,14 @@ public final class HomeCoordinator : Coordinator {
         
         let images = ["dollarsign.square", "star.fill"]
         let titles = ["Moedas", "Favoritas"]
-    
+        
         for x in 0..<items.count {
             items[x].image = UIImage(systemName: images[x])
             items[x].title = titles[x]
         }
-
+        
         homeBar.modalPresentationStyle = .fullScreen
-
+        
         self.navigationController.pushViewController(homeBar, animated: false)
     }
 }
