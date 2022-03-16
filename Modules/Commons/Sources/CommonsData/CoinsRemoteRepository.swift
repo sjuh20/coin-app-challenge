@@ -19,14 +19,14 @@ public struct CoinsRemoteRepository {
     private let ASSETS_URL: String = "https://rest.coinapi.io/v1/assets/"
     
     public func fetchCoinsFavorites(coinsFavorites: String, completion: @escaping([Coin]) -> Void) {
-
+        
         guard let url = URL(string: "\(ASSETS_FILTER_URL + coinsFavorites)") else {
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("AEA7C6F6-4FCA-4C45-901E-BF07DD7741B7", forHTTPHeaderField: "X-CoinAPI-Key")
+        request.setValue("\(Constantes.API_KEY)", forHTTPHeaderField: "X-CoinAPI-Key")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
@@ -49,14 +49,14 @@ public struct CoinsRemoteRepository {
     }
     
     public func fetchCoinById(coinId: String, completion: @escaping(Coin) -> Void) {
-    
+        
         guard let url = URL(string: "\(ASSETS_URL + coinId)") else {
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("AEA7C6F6-4FCA-4C45-901E-BF07DD7741B7", forHTTPHeaderField: "X-CoinAPI-Key")
+        request.setValue("\(Constantes.API_KEY)", forHTTPHeaderField: "X-CoinAPI-Key")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
