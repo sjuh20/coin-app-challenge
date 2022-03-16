@@ -57,7 +57,14 @@ public class FavoritesViewController: UIViewController {
         super.viewDidAppear(animated)
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         // Adicionar a chamada da api aqui para sempre atualizar as chamadas
-        debugPrint("RELOAD")
+        let repository = FavoriteCoinRepository()
+        let coinsRepository = CoinsRemoteRepository()
+        coinsRepository.fetchCoinsFavorites(
+            coinsFavorites: repository.getFavoritesCoinsFormatedString(),
+            completion: { coins in
+                self.coins = coins
+                self.collectionView.reloadData()
+            })
     }
     
     public override func viewDidLoad() {
@@ -69,24 +76,7 @@ public class FavoritesViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
         
         self.setUpTitleConstraints()
-        
         let repository = FavoriteCoinRepository()
-        
-        repository.clearFavoritesCoins()
-        
-        let coin1 = FavoriteCoin("BTC")
-        let coin2 = FavoriteCoin("USD")
-        let coin3 = FavoriteCoin("CNY")
-        let coin4 = FavoriteCoin("EUR")
-        let coin5 = FavoriteCoin("PLN")
-        
-        
-        repository.addFavoriteCoins(favoriteCoin: coin1)
-        repository.addFavoriteCoins(favoriteCoin: coin2)
-        repository.addFavoriteCoins(favoriteCoin: coin3)
-        repository.addFavoriteCoins(favoriteCoin: coin4)
-        repository.addFavoriteCoins(favoriteCoin: coin5)
-        
         let coinsRepository = CoinsRemoteRepository()
         coinsRepository.fetchCoinsFavorites(
             coinsFavorites: repository.getFavoritesCoinsFormatedString(),
@@ -95,7 +85,6 @@ public class FavoritesViewController: UIViewController {
                 self.configureUICollectionView()
                 self.setUpCollectionViewConstraints()
                 self.setUpSubtitleConstraints()
-                debugPrint(coins)
             })
         
     }
@@ -150,7 +139,7 @@ extension UIImageView {
     func load(url: URL?) {
         DispatchQueue.global().async { [weak self] in
             if url == nil {
-                debugPrint("Vazio")
+                self?.image = UIImage(named: "bitcoin")
             } else if let data = try? Data(contentsOf: url!) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
@@ -188,8 +177,6 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         
         if coin.idIcon != nil {
-            debugPrint(
-                "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
             cell.iconCoin.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
         }
         
@@ -207,7 +194,6 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        debugPrint("Item selecionado: \(coins[indexPath.item].assetID)")
         if self.navigationController != nil {
             let detailsCoordinator = FavoritesCoordinator(navigationController: self.navigationController!)
             detailsCoordinator.navigateToDetails(coinId: coins[indexPath.item].assetID)

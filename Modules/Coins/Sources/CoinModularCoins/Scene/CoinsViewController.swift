@@ -54,6 +54,7 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.tabBarController?.tabBar.isHidden = false
+        self.tableView.reloadData()
     }
     
     public override func viewDidLoad() {
@@ -75,7 +76,7 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
                     let price = model.price_usd ?? 0
                     let formatter = CoinsViewController.numberFormatter
                     let priceString = formatter.string(from: NSNumber(value: price))
-                    let iconUrl = URL (string: APICaller.shared.icons.filter({ icon in
+                    let iconUrl = URL(string: APICaller.shared.icons.filter({ icon in
                         icon.asset_id == model.asset_id
                     }).first?.url ?? "")
                     return CryptoTableViewCellViewModel(
@@ -94,6 +95,8 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
+    
+   
     
     public  override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

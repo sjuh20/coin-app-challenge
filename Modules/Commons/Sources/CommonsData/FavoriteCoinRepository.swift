@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created byAna Brito Souza on 10/03/22.
+//  Created by Ana Brito Souza on 10/03/22.
 //
 
 import Foundation
@@ -25,16 +25,10 @@ public class FavoriteCoinRepository {
         var favoritesCoins = [FavoriteCoin]()
         
         if let storedObject: Data = UserDefaults.standard.data(forKey: "favorites_coins") {
-            do
-            {
+            do {
                 favoritesCoins = try PropertyListDecoder().decode([FavoriteCoin].self, from: storedObject)
-                for favoriteCoin in favoritesCoins
-                {
-                    debugPrint(favoriteCoin.assetID)
-                }
             }
-            catch
-            {
+            catch {
                 print(error.localizedDescription)
                 return []
             }
@@ -57,7 +51,6 @@ public class FavoriteCoinRepository {
     public func removeFavoriteCoins(favoriteCoin: FavoriteCoin) {
         var favoritesCoins = getFavoriteCoins()
         if let index = favoritesCoins.firstIndex(where: {$0.assetID == favoriteCoin.assetID}) {
-            debugPrint(index)
             favoritesCoins.remove(at: index)
         } else {
             return

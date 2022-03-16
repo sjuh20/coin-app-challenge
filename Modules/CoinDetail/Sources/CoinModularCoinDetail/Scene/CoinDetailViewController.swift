@@ -27,15 +27,19 @@ public class CoinDetailViewController: UIViewController {
     
     public override func loadView() {
         self.detalhesScrenn = CoinDetailView()
-        self.view = self.detalhesScrenn
+        
+        repository = FavoriteCoinRepository()
+        let result = repository?.coinContainsInFavoritesById(coinId: self.coinId)
+        self.detalhesScrenn?.setIsFavorite(isFavorite: result ?? false)
         
         let coinsRepository = CoinsRemoteRepository()
         coinsRepository.fetchCoinById(
             coinId: self.coinId,
             completion: { coin in
-                debugPrint(coin)
                 self.detalhesScrenn?.setData(coin: coin)
             })
+        
+        self.view = self.detalhesScrenn
     }
     
     public override func viewDidLoad() {
@@ -43,6 +47,17 @@ public class CoinDetailViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.tabBarController?.tabBar.isHidden = true
         self.detalhesScrenn?.delegate(delegate: self)
+        self.detalhesScrenn?.setCoinId(coinId: coinId)
+        
+        repository = FavoriteCoinRepository()
+    }
+    
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 }
 
@@ -53,7 +68,7 @@ extension CoinDetailViewController: CoinDetailProtocol{
         self.navigationController?.popViewController(animated: true)
     }
     
-    func actionAddButton() {
+    func actionAddButton(coinId:String) {
         self.repository?.addFavoriteCoins(favoriteCoin: FavoriteCoin(coinId))
     }
     

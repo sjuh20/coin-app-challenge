@@ -9,5 +9,7 @@ import Foundation
 
 public class Constantes{
     
-    public static let API_KEY = "68C87D3E-C615-4C5E-A080-5995DE794D2E"
+//    public static let API_KEY = "3C42F2CC-6D84-49A8-8C19-ABA1268338CB"
+    public static let API_KEY = "FF547373-E98D-463E-9889-4CA85651183E"
+
 }

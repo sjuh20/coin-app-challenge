@@ -10,16 +10,26 @@ import CommonsModel
 
 protocol CoinDetailProtocol: AnyObject{
     func actionBackButton()
-    func actionAddButton()
+    func actionAddButton(coinId: String)
     func actionRemoveButton(coinId: String)
 }
 
 class CoinDetailView: UIView {
-
-    weak var delegate:CoinDetailProtocol?
     
-    func delegate(delegate:CoinDetailProtocol?){
+    weak var delegate: CoinDetailProtocol?
+    var coinId: String?
+    var isFavorite: Bool = false
+    
+    func delegate(delegate: CoinDetailProtocol?){
         self.delegate = delegate
+    }
+    
+    func setCoinId(coinId: String) {
+        self.coinId = coinId
+    }
+    
+    func setIsFavorite(isFavorite: Bool) {
+        self.isFavorite = isFavorite
     }
     
     public var viewPreta: DetalhesViewBlack = {
@@ -55,7 +65,7 @@ class CoinDetailView: UIView {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage (named:  "bitcoin")
         image.contentMode = .scaleAspectFit
-
+        
         return image
     }()
     
@@ -114,26 +124,26 @@ class CoinDetailView: UIView {
         self.addSubview(self.valorLabel)
         self.addSubview(self.viewPreta)
     }
-
+    
     private func configBackGround(){
         self.backgroundColor = UIColor(red: 141/255, green: 149/255, blue: 98/255, alpha: 1.0)
     }
-   
+    
     @objc private func tappedBackButton(){
         self.delegate?.actionBackButton()
     }
     
     @objc private func tappedAdicionarButton(sender: UIButton!){
-        self.delegate?.actionAddButton()
-        if !estrelaImage.isHidden{
-            adicionarButton.setTitle("Adicionar", for: .normal)
-            estrelaImage.isHidden = true
-            
-            
+        if !self.isFavorite {
+            self.delegate?.actionAddButton(coinId: self.coinId ?? "")
+            self.adicionarButton.setTitle("Remover", for: .normal)
+            self.estrelaImage.isHidden = false
+            self.isFavorite = !self.isFavorite
         }else{
-        adicionarButton.setTitle("Remover", for: .normal)
-        estrelaImage.isHidden = false
-            
+            self.delegate?.actionRemoveButton(coinId: self.coinId ?? "")
+            self.adicionarButton.setTitle("Adicionar", for: .normal)
+            self.estrelaImage.isHidden = true
+            self.isFavorite = !self.isFavorite
         }
     }
     
@@ -141,6 +151,14 @@ class CoinDetailView: UIView {
     
     func setData(coin: Coin) {
         self.nameLabel.text = coin.name
+        
+        if !isFavorite {
+            self.adicionarButton.setTitle("Adicionar", for: .normal)
+            self.estrelaImage.isHidden = true
+        }else{
+            self.adicionarButton.setTitle("Remover", for: .normal)
+            self.estrelaImage.isHidden = false
+        }
         
         let priceUsd: Double? = coin.priceUsd
         if priceUsd != nil {
@@ -156,8 +174,6 @@ class CoinDetailView: UIView {
         }
         
         if coin.idIcon != nil {
-            debugPrint(
-                "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!).png")
             self.moedaImage.load(url: URL(string: "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/\(coin.idIcon!.replacingOccurrences(of: "-", with: "")).png"))
         }
         
@@ -166,10 +182,10 @@ class CoinDetailView: UIView {
     
     private func setUpConstraints(){
         NSLayoutConstraint.activate([
-        
+            
             self.nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
             self.nameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-        
+            
             self.backButton.topAnchor.constraint(equalTo: self.nameLabel.topAnchor),
             self.backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             
@@ -181,12 +197,12 @@ class CoinDetailView: UIView {
             self.valorLabel.topAnchor.constraint(equalTo: self.moedaImage.bottomAnchor, constant: 10),
             self.valorLabel.centerXAnchor.constraint(equalTo: self.nameLabel.centerXAnchor),
             self.valorLabel.heightAnchor.constraint(equalToConstant: 70),
-    
+            
             self.adicionarButton.topAnchor.constraint(equalTo: self.valorLabel.bottomAnchor, constant: 20),
             self.adicionarButton.leadingAnchor.constraint(equalTo: self.leadingAnchor , constant: 30),
             self.adicionarButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -30),
             self.adicionarButton.heightAnchor.constraint(equalToConstant: 50),
-
+            
             self.viewPreta.topAnchor.constraint(equalTo: self.adicionarButton.bottomAnchor, constant: 40),
             self.viewPreta.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.viewPreta.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -198,14 +214,14 @@ class CoinDetailView: UIView {
             self.estrelaImage.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
-
+    
 }
 
 extension UIImageView {
     func load(url: URL?) {
         DispatchQueue.global().async { [weak self] in
             if url == nil {
-                debugPrint("Vazio")
+                self?.image = UIImage(named: "bitcoin")
             } else if let data = try? Data(contentsOf: url!) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
