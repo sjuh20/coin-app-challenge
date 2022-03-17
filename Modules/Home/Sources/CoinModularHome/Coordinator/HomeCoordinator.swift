@@ -25,6 +25,7 @@ public final class HomeCoordinator : Coordinator {
         let coinsViewController = UINavigationController(rootViewController: CoinsViewController())
         let favoritesViewController = UINavigationController(rootViewController: FavoritesViewController())
         homeBar.tabBar.backgroundColor = .black
+        
         homeBar.setViewControllers([coinsViewController, favoritesViewController], animated: false)
         
         guard let items = homeBar.tabBar.items else {
@@ -40,6 +41,7 @@ public final class HomeCoordinator : Coordinator {
         }
         
         homeBar.modalPresentationStyle = .fullScreen
+        UITabBar.appearance().tintColor = .darkGray
         
         self.navigationController.pushViewController(homeBar, animated: false)
     }

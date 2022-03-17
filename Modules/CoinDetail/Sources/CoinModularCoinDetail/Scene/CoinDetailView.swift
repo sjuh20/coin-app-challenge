@@ -45,8 +45,8 @@ class CoinDetailView: UIView {
         button.setTitle("Voltar", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         let imageBack = UIImage(named: "back")
-        imageBack?.withTintColor(UIColor.white)
         button.setImage(imageBack, for: .normal)
+        button.setImageTintColor(.white)
         button.addTarget(self, action: #selector(self.tappedBackButton), for: .touchUpInside)
         return button
     }()
@@ -84,6 +84,7 @@ class CoinDetailView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Adicionar", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 20 , weight: .black)
         button.clipsToBounds = true
         button.layer.cornerRadius = 7.5
         button.layer.borderWidth = 1
@@ -230,5 +231,16 @@ extension UIImageView {
                 }
             }
         }
+    }
+}
+
+extension UIButton{
+
+    func setImageTintColor(_ color: UIColor) {
+
+        let tintedImage = self.imageView?.image?.withRenderingMode(.alwaysTemplate)
+        self.setImage(tintedImage, for: .normal)
+        self.tintColor = color
+
     }
 }
