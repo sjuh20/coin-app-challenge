@@ -106,7 +106,7 @@ class CryptoTableViewCell: UITableViewCell {
         
         
         if viewModel.iconUrl?.absoluteString == nil {
-            self.iconImageView.image = UIImage(named: "inter")
+            self.iconImageView.image = UIImage(named: "black")
         } else
         
         if let url = viewModel.iconUrl {

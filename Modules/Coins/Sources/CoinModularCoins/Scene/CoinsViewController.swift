@@ -109,7 +109,7 @@ public class CoinsViewController: UIViewController, UITableViewDelegate, UITable
         coinsView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         coinsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         coinsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        coinsView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        coinsView.heightAnchor.constraint(equalToConstant: 170).isActive = true
         
         tableView.topAnchor.constraint(equalTo: coinsView.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
