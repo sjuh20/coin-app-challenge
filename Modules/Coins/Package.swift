@@ -13,11 +13,12 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Commons"),
+        .package(path: "../CoinDetail")
     ],
     targets: [
         .target(
             name: "CoinModularCoins",
-            dependencies: ["Commons"]),
+            dependencies: ["Commons", "CoinDetail"]),
         .testTarget(
             name: "CoinModularCoinsTests",
             dependencies: ["CoinModularCoins"]),
